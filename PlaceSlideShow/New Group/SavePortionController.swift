@@ -118,6 +118,9 @@ class SavePortionController: NSViewController {
     
     @IBAction func saveButtonClicked(_ sender: Any) {
         let panel = NSSavePanel()
+        let launcherLogPathWithTilde = "~/Pictures" as NSString
+        let expandedLauncherLogPath = launcherLogPathWithTilde.expandingTildeInPath
+        panel.directoryURL = NSURL.fileURL(withPath: expandedLauncherLogPath, isDirectory: true)
         panel.title = "Save GIF"
         panel.message = "Please save the GIF somewhere"
         panel.nameFieldLabel = "Name to give GIF file"

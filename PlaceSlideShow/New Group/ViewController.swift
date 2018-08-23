@@ -74,6 +74,9 @@ class ViewController: NSViewController {
     
     fileprivate func getUserSelectedPlaceDirectory() {
         let dialog = NSOpenPanel()
+        let launcherLogPathWithTilde = "~/Pictures" as NSString
+        let expandedLauncherLogPath = launcherLogPathWithTilde.expandingTildeInPath
+        dialog.directoryURL = NSURL.fileURL(withPath: expandedLauncherLogPath, isDirectory: true)
         dialog.title = "Choose images folder"
         dialog.canChooseDirectories = true
         dialog.canChooseFiles = false
