@@ -27,7 +27,10 @@ public class PlaceTextWriter {
         FileWriter fw = new FileWriter(tempName, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw);
-        out.println(builder.toString());
+        String outputString = builder.toString();
+        if(outputString.trim().length() > 0){
+            out.println(builder.toString().trim());
+        }
         out.close();
         bw.close();
         fw.close();

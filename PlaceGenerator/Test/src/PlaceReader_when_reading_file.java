@@ -2,6 +2,7 @@ import com.lovedLabor.PlaceReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.URL;
 
 
@@ -64,5 +65,17 @@ public class PlaceReader_when_reading_file {
             e.printStackTrace();
             Assertions.fail("Unexpected exception");
         }
+    }
+
+    @Test
+    public void should_output_full_csv_to_color_coordinates_only() {
+        try {
+            PlaceReader reader = new PlaceReader("/Users/austin/Documents/PlaceSpace/tile_placements.csv");
+            System.out.println(reader.getLineCount());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assertions.fail("Should not have failed unless the file moved");
+        }
+
     }
 }

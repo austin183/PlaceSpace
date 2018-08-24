@@ -7,8 +7,8 @@ public class PlaceReader {
     private int lineCount;
     public PlaceReader(String filePath) throws IllegalArgumentException, IOException, IndexOutOfBoundsException {
         if(filePath.isEmpty()) throw new IllegalArgumentException("Cannot read a blank string as a path to a file");
-        reader = new BufferedReader(new FileReader(filePath));
         lineCount = getLineCount(filePath);
+        reader = new BufferedReader(new FileReader(filePath));
         if(lineCount <= 1) throw new IndexOutOfBoundsException("Could not find any lines to process");
     }
 
@@ -19,6 +19,10 @@ public class PlaceReader {
     public String getNextLine() throws IOException {
         throwNoReaderAvailableError();
         String line = reader.readLine();
+        if(line == null){
+            reader.close();
+            reader = null;
+        }
         return line;
     }
 
