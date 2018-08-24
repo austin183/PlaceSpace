@@ -58,8 +58,8 @@ public class PlaceReader {
                 }
                 readChars = is.read(c);
             }
-
-            return count == 0 ? 1 : count;
+            if(count == 0) throw new IndexOutOfBoundsException("Found 0 lines in the text file to read");
+            return count;
         } finally {
             is.close();
         }
