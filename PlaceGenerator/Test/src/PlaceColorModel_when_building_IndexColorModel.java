@@ -9,5 +9,6 @@ public class PlaceColorModel_when_building_IndexColorModel {
     public void should_return_IndexColorModel_for_place(){
         IndexColorModel model = new PlaceColorModel().getPlaceColorModel();
         Assertions.assertTrue(model.isValid());
+
     }
 }
