@@ -28,5 +28,6 @@ public class PlaceShrink_when_converting_full_csv_to_color_coordinates_only {
             e.printStackTrace();
             Assertions.fail();
         }
+
     }
 }
