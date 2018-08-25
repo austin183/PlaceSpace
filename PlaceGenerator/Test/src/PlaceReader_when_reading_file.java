@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class PlaceReader_when_reading_file {
     @Test
-    public void should_fail_to_find_file_for_reading_when_filePath_is_not_provided(){
+    public void should_fail_to_find_file_for_reading_when_filePath_is_not_provided() {
         String filePath = "";
         try {
             PlaceReader reader = new PlaceReader(filePath);
@@ -18,7 +18,7 @@ public class PlaceReader_when_reading_file {
     }
 
     @Test
-    public void should_fail_to_find_file_for_reading_when_file_does_not_exist(){
+    public void should_fail_to_find_file_for_reading_when_file_does_not_exist() {
         String filePath = "gibberish";
         try {
             PlaceReader reader = new PlaceReader(filePath);
@@ -28,7 +28,7 @@ public class PlaceReader_when_reading_file {
     }
 
     @Test
-    public void should_find_existing_file_for_reading_and_return_the_line_count(){
+    public void should_find_existing_file_for_reading_and_return_the_line_count() {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource("test.txt");
         String filePath = resource.getPath();
@@ -43,7 +43,7 @@ public class PlaceReader_when_reading_file {
     }
 
     @Test
-    public void should_get_next_line_for_test_file(){
+    public void should_get_next_line_for_test_file() {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource("test.txt");
         String filePath = resource.getPath();
@@ -54,7 +54,7 @@ public class PlaceReader_when_reading_file {
             actual = reader.getNextLine();
             Assertions.assertEquals("1491167838000,c2Md9m4QckH8M+lhNh9btgoiFDk=,326,258,0", actual);
             int countDown = reader.getLineCount() - 1;
-            while(countDown > 0){
+            while (countDown > 0) {
                 countDown--;
                 String line = reader.getNextLine();
                 Assertions.assertFalse(line.isEmpty(), "Expecting data from the file");

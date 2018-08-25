@@ -6,7 +6,7 @@ import java.awt.image.IndexColorModel;
 
 public class PlaceColorModel_when_building_IndexColorModel {
     @Test
-    public void should_return_IndexColorModel_for_place(){
+    public void should_return_IndexColorModel_for_place() {
         IndexColorModel model = new PlaceColorModel().getPlaceColorModel();
         Assertions.assertTrue(model.isValid());
 

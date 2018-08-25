@@ -1,7 +1,6 @@
 package com.lovedLabor;
 
 import java.io.*;
-import java.util.UUID;
 
 public class PlaceTextWriter {
     private int buffer = 20000;
@@ -18,7 +17,7 @@ public class PlaceTextWriter {
     public void writeLine(String line) throws IOException {
         builder.append(line + "\n");
         counter++;
-        if(counter == buffer){
+        if (counter == buffer) {
             flushBufferToFile();
         }
     }
@@ -28,7 +27,7 @@ public class PlaceTextWriter {
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw);
         String outputString = builder.toString();
-        if(outputString.trim().length() > 0){
+        if (outputString.trim().length() > 0) {
             out.println(builder.toString().trim());
         }
         out.close();
@@ -40,7 +39,7 @@ public class PlaceTextWriter {
     }
 
     public void finalizeTextFile() throws IOException {
-        if(counter > 0){
+        if (counter > 0) {
             flushBufferToFile();
         }
         copyFileUsingStream(new File(tempName), new File(finalFilePath));

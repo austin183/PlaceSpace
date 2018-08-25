@@ -36,10 +36,10 @@ public class PlaceImageWriter_when_working_with_images {
             int y = 500;
             int colorIndex = 4; //pink
             writer.changePixel(x, y, colorIndex);
-            writer.changePixel(x+1, y, colorIndex);
-            writer.changePixel(x, y+1, colorIndex);
-            writer.changePixel(x-1, y, colorIndex);
-            writer.changePixel(x, y-1, colorIndex);
+            writer.changePixel(x + 1, y, colorIndex);
+            writer.changePixel(x, y + 1, colorIndex);
+            writer.changePixel(x - 1, y, colorIndex);
+            writer.changePixel(x, y - 1, colorIndex);
             BufferedImage image = writer.getCurrentImage();
 
 
@@ -53,7 +53,7 @@ public class PlaceImageWriter_when_working_with_images {
     }
 
     @Test
-    public void should_create_new_image_and_generate_pixel_values_from_file(){
+    public void should_create_new_image_and_generate_pixel_values_from_file() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             URL resource = classLoader.getResource("bigccTest.txt");
@@ -61,7 +61,7 @@ public class PlaceImageWriter_when_working_with_images {
             PlaceReader reader = new PlaceReader(filePath);
             //PlaceReader reader = new PlaceReader("/Users/austin/Documents/PlaceSpace/cctiles_sorted.txt");
 
-            int lineCount=reader.getLineCount();
+            int lineCount = reader.getLineCount();
             System.out.println(lineCount);
             PlaceImageWriter writer = new PlaceImageWriter();
             String line = "";
@@ -69,20 +69,21 @@ public class PlaceImageWriter_when_working_with_images {
             int x = 0;
             int y = 0;
             int ci = 0;
-            while(line != null){
+            while (line != null) {
                 counter++;
                 line = reader.getNextLine();
-                if(line == null) continue;
-                try{
+                if (line == null) continue;
+                try {
                     String[] split = line.split(",");
-                    if(Integer.parseInt(split[0]) > 0 ){
+                    if (Integer.parseInt(split[0]) > 0) {
                         x = Integer.parseInt(split[0]);
                         y = Integer.parseInt(split[1]);
                         ci = Integer.parseInt(split[2]);
-                        if(counter % 10000 == 0)System.out.println(counter + " of " + lineCount + " changing " + x + " " + y + " to ci " + ci);
+                        if (counter % 10000 == 0)
+                            System.out.println(counter + " of " + lineCount + " changing " + x + " " + y + " to ci " + ci);
                         writer.changePixel(x, y, ci);
                     }
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.out.println("********");
                     e.printStackTrace();
                     System.out.println(counter + " of " + lineCount + " changing " + x + " " + y + " to ci " + ci);
@@ -100,29 +101,28 @@ public class PlaceImageWriter_when_working_with_images {
     }
 
     @Test
-    public void should_write_series_of_pictures_in_a_specified_directory(){
-        try{
+    public void should_write_series_of_pictures_in_a_specified_directory() {
+        try {
             ClassLoader classLoader = getClass().getClassLoader();
             URL resource = classLoader.getResource("bigccTest.txt");
             String filePath = resource.getPath();
             PlaceReader reader = new PlaceReader(filePath);
 
-            int lineCount=reader.getLineCount();
+            int lineCount = reader.getLineCount();
             System.out.println(lineCount);
             PlaceImageWriter writer = new PlaceImageWriter();
             int targetFrames = 20;
             String directoryPath = "/Users/austin/Documents/PlaceSpace/test";
             writer.writeSeries(reader, targetFrames, directoryPath);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
         }
     }
 
     @Test
-    public void big_test(){
-        try{
+    public void big_test() {
+        try {
             /*
             ClassLoader classLoader = getClass().getClassLoader();
             URL resource = classLoader.getResource("bigccTest.txt");
@@ -130,14 +130,13 @@ public class PlaceImageWriter_when_working_with_images {
             PlaceReader reader = new PlaceReader(filePath);
             */
             PlaceReader reader = new PlaceReader("/Users/austin/Documents/PlaceSpace/cctiles_sorted.txt");
-            int lineCount=reader.getLineCount();
+            int lineCount = reader.getLineCount();
             System.out.println(lineCount);
             PlaceImageWriter writer = new PlaceImageWriter();
             int targetFrames = 25000;
             String directoryPath = "/Users/austin/Documents/PlaceSpace/test";
             writer.writeSeries(reader, targetFrames, directoryPath);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
         }

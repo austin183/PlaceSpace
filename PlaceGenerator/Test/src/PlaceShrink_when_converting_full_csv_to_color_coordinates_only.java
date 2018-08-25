@@ -24,7 +24,7 @@ public class PlaceShrink_when_converting_full_csv_to_color_coordinates_only {
             PlaceReader resultsReader = new PlaceReader(outputPath);
             System.out.println(outputPath);
             Assertions.assertTrue(resultsReader.getLineCount() > 0, "Should get lines in the output file");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
         }

@@ -5,14 +5,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class PlaceImageWriter {
     private BufferedImage currentImage;
@@ -22,9 +20,10 @@ public class PlaceImageWriter {
     private int maxBufferSize = 100;
     private int fileCounter = 0;
     private int frameCountLength = 0;
+
     public PlaceImageWriter() throws IOException {
         model = new PlaceColorModel().getPlaceColorModel();
-        currentImage = new BufferedImage(1001,1001, BufferedImage.TYPE_BYTE_BINARY, model);
+        currentImage = new BufferedImage(1001, 1001, BufferedImage.TYPE_BYTE_BINARY, model);
         graphics = currentImage.createGraphics();
         graphics.setBackground(Color.white);
         imageFileBuffer = new ArrayList<>();
@@ -38,11 +37,10 @@ public class PlaceImageWriter {
         int r = model.getRed(colorIndex);
         int g = model.getGreen(colorIndex);
         int b = model.getBlue(colorIndex);
-        int p = (r<<16) | (g<<8) | b;
-        try{
+        int p = (r << 16) | (g << 8) | b;
+        try {
             currentImage.setRGB(x, y, p);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("x " + x + " y " + y);
         }
@@ -53,27 +51,27 @@ public class PlaceImageWriter {
     }
 
     public void writeSeries(PlaceReader reader, int targetFrames, String directoryPath) {
-        try{
+        try {
             long start = System.nanoTime();
             int cutContentPeriod = reader.getLineCount() / targetFrames;
             String line = "";
             frameCountLength = String.valueOf(targetFrames).length() + 1;
             int counter = 0;
             int lineCount = reader.getLineCount();
-            while(line != null){
+            while (line != null) {
                 line = reader.getNextLine();
                 counter++;
                 changePixelFromLine(line, counter, lineCount);
-                if(counter % cutContentPeriod == 0){
+                if (counter % cutContentPeriod == 0) {
                     writeSeriesFile(directoryPath);
                 }
             }
-            if(counter % cutContentPeriod != 0){
+            if (counter % cutContentPeriod != 0) {
                 writeSeriesFile(directoryPath);
             }
             writeLastOfSeriesToFile(directoryPath);
             System.out.println("Write Series took " + String.valueOf(System.nanoTime() - start) + " nanoseconds");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -117,15 +115,14 @@ public class PlaceImageWriter {
         int y;
         int ci;
         String[] split = line.split(",");
-        try{
-            if(Integer.parseInt(split[0]) > 0 ){
+        try {
+            if (Integer.parseInt(split[0]) > 0) {
                 x = Integer.parseInt(split[0]);
                 y = Integer.parseInt(split[1]);
                 ci = Integer.parseInt(split[2]);
                 changePixel(x, y, ci);
             }
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return;
         }
 
