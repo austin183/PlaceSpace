@@ -45,7 +45,7 @@ public class PlaceImageWriter_when_working_with_images {
 
             File temp = File.createTempFile("img", "test").getAbsoluteFile();
             System.out.println(temp.getAbsolutePath());
-            writer.writeToFile(temp);
+            writer.writeToFile(image, temp);
         } catch (IOException e) {
             e.printStackTrace();
             Assertions.fail();
@@ -92,7 +92,7 @@ public class PlaceImageWriter_when_working_with_images {
             }
             File temp = File.createTempFile("img", "test.png").getAbsoluteFile();
             System.out.println(temp.getAbsolutePath());
-            writer.writeToFile(temp);
+            writer.writeToFile(writer.getCurrentImage(), temp);
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Should not have failed unless the file moved");
@@ -133,7 +133,7 @@ public class PlaceImageWriter_when_working_with_images {
             int lineCount=reader.getLineCount();
             System.out.println(lineCount);
             PlaceImageWriter writer = new PlaceImageWriter();
-            int targetFrames = 30000;
+            int targetFrames = 25000;
             String directoryPath = "/Users/austin/Documents/PlaceSpace/test";
             writer.writeSeries(reader, targetFrames, directoryPath);
         }
