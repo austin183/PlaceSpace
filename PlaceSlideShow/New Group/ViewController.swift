@@ -32,6 +32,22 @@ class ViewController: NSViewController {
         placeScrollView.magnify(toFit: (placeImage.image?.alignmentRect)!)
     }
     
+    @IBAction func zoomOutMenuItemClicked(_ sender:NSMenuItem){
+        let magnificationDecrement:CGFloat = CGFloat(0.1)
+        
+        if(placeScrollView.magnification - magnificationDecrement >= placeScrollView.minMagnification){
+            placeScrollView.magnification = placeScrollView.magnification - magnificationDecrement
+        }
+    }
+    
+    @IBAction func zoomInMenuItemClicked(_ sender:NSMenuItem){
+        let magnificationIncrement:CGFloat = CGFloat(0.1)
+        
+        if(placeScrollView.magnification + magnificationIncrement <= placeScrollView.maxMagnification){
+            placeScrollView.magnification = placeScrollView.magnification + magnificationIncrement
+        }
+    }
+    
     @IBAction func previousMenuItemSelected(_ sender: NSMenuItem) {
         goToPreviousImage()
     }

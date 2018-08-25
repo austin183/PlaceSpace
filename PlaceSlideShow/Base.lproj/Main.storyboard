@@ -153,14 +153,27 @@
                                                 <action selector="slideShowMenuItemSelected:" target="Ady-hI-5gd" id="eI6-pX-XSP"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Zoom Out" keyEquivalent="" id="RXy-Fd-bGk">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="zoomOutMenuItemClicked:" target="Ady-hI-5gd" id="X0b-wT-F0y"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom In" keyEquivalent="" id="MzB-9i-qQJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="zoomInMenuItemClicked:" target="Ady-hI-5gd" id="9ng-6W-TmK"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Zoom to Fit" keyEquivalent="=" id="DDf-zK-QZL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="zoomToFitMenuItemSelected:" target="Ady-hI-5gd" id="JJI-I1-srR"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
                                             </connections>
