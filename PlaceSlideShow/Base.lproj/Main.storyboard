@@ -527,9 +527,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0y-jk-Fyr">
-                                <rect key="frame" x="0.0" y="-8" width="1000" height="555"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="547"/>
                                 <clipView key="contentView" id="vrB-Bz-54z">
-                                    <rect key="frame" x="1" y="1" width="998" height="553"/>
+                                    <rect key="frame" x="1" y="1" width="998" height="545"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Olg-lX-Cix">
@@ -554,11 +554,11 @@
                                     </constraints>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Sda-fa-nX6">
-                                    <rect key="frame" x="1" y="538" width="998" height="16"/>
+                                    <rect key="frame" x="1" y="530" width="998" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="KNj-Qb-VxM">
-                                    <rect key="frame" x="983" y="1" width="16" height="553"/>
+                                    <rect key="frame" x="983" y="1" width="16" height="545"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -628,7 +628,7 @@
                             <constraint firstAttribute="trailing" secondItem="GMj-m3-tjp" secondAttribute="trailing" constant="20" symbolic="YES" id="U8g-jO-t4J"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="UDN-Fc-bU9"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="leading" secondItem="kcX-8d-pVW" secondAttribute="trailing" constant="8" symbolic="YES" id="WUW-HT-6oi"/>
-                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" constant="-8" id="ZeU-BX-nVJ"/>
+                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" id="ZeU-BX-nVJ"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="8" symbolic="YES" id="bAH-oY-sIP"/>
                             <constraint firstItem="jGf-BX-UBm" firstAttribute="leading" secondItem="lTA-ye-LG1" secondAttribute="trailing" constant="8" symbolic="YES" id="foJ-8K-zDw"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="lGs-AD-gHr"/>
