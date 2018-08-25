@@ -17,10 +17,10 @@ public class PlaceImageWriter {
     private IndexColorModel model;
     private Graphics2D graphics;
     private List<BufferedImage> imageFileBuffer;
-    private int maxBufferSize = 100;
     private int fileCounter = 0;
     private int frameCountLength = 0;
-
+    private int maxBufferSize;
+    private long absoluteStart;
     public PlaceImageWriter() throws IOException {
         model = new PlaceColorModel().getPlaceColorModel();
         currentImage = new BufferedImage(1001, 1001, BufferedImage.TYPE_BYTE_BINARY, model);
@@ -50,9 +50,10 @@ public class PlaceImageWriter {
         ImageIO.write(currentImage, "PNG", file);
     }
 
-    public void writeSeries(PlaceReader reader, int targetFrames, String directoryPath) {
+    public void writeSeries(PlaceReader reader, int targetFrames, String directoryPath, int maxBufferSize) {
         try {
-            long start = System.nanoTime();
+            absoluteStart = System.nanoTime();
+            this.maxBufferSize = maxBufferSize;
             int cutContentPeriod = reader.getLineCount() / targetFrames;
             String line = "";
             frameCountLength = String.valueOf(targetFrames).length() + 1;
@@ -60,6 +61,7 @@ public class PlaceImageWriter {
             int lineCount = reader.getLineCount();
             while (line != null) {
                 line = reader.getNextLine();
+                if (line == null) break;
                 counter++;
                 changePixelFromLine(line, counter, lineCount);
                 if (counter % cutContentPeriod == 0) {
@@ -70,7 +72,7 @@ public class PlaceImageWriter {
                 writeSeriesFile(directoryPath);
             }
             writeLastOfSeriesToFile(directoryPath);
-            System.out.println("Write Series took " + String.valueOf(System.nanoTime() - start) + " nanoseconds");
+            System.out.println("Write Series took " + (System.nanoTime() - absoluteStart) * .000000001 + " seconds");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,9 +100,11 @@ public class PlaceImageWriter {
             File file = filePath.toFile();
             if (fileCounter % maxBufferSize == 0) System.out.println(filePath);
             writeToFile(image, file);
+
             fileCounter++;
         }
         System.out.println("Buffer Write took " + (System.nanoTime() - start) * .000000001 + " seconds");
+        System.out.println("Total time so far: " + (System.nanoTime() - absoluteStart) * .000000001 + " seconds");
         imageFileBuffer.clear();
     }
 
