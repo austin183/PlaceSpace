@@ -218,6 +218,7 @@
 				TargetAttributes = {
 					D95FB4D51EAEC85B00B8C551 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = G55SZ5BVUU;
 						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -456,9 +457,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PlaceSlideShow/PlaceSlideShow.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = G55SZ5BVUU;
 				INFOPLIST_FILE = PlaceSlideShow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nada.PlaceSlideShow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeenthusiast.PlaceSlideShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -471,9 +473,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PlaceSlideShow/PlaceSlideShow.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = G55SZ5BVUU;
 				INFOPLIST_FILE = PlaceSlideShow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nada.PlaceSlideShow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeenthusiast.PlaceSlideShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;

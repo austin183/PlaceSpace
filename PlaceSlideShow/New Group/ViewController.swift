@@ -28,6 +28,10 @@ class ViewController: NSViewController {
         toggleSlideShow()
     }
     
+    @IBAction func zoomToFitMenuItemSelected(_ sender:NSMenuItem){
+        placeScrollView.magnify(toFit: (placeImage.image?.alignmentRect)!)
+    }
+    
     @IBAction func previousMenuItemSelected(_ sender: NSMenuItem) {
         goToPreviousImage()
     }
@@ -62,9 +66,11 @@ class ViewController: NSViewController {
         place.buildPngContents(placeDirectory: placeDirectory)
         
         if(place.getContentsCount() > 0){
+            let defaults = UserDefaults.standard
+            defaults.set(placeDirectory, forKey: "defaultDirectory")
             imageSlider.maxValue = Double(place.getContentsCount() - 1)
             place.setContentsIndex(index: 0)
-            updateCurrentIndexLabel(index: 0)
+            updateUI(index: 0)
         }
         else{
             placeDirectory = currentPlaceDirectory
