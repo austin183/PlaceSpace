@@ -682,6 +682,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GRo-az-Qzh">
+                                <rect key="frame" x="18" y="572" width="964" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CurrentIndex" placeholderString="CurrentIndex" id="Csq-eb-8oV">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jGf-BX-UBm">
+                                <rect key="frame" x="800" y="565" width="93" height="32"/>
+                                <buttonCell key="cell" type="push" title="Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4FB-mf-na1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="goToPrev:" target="XfG-lQ-9wD" id="qKs-P3-kCJ"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9mX-BG-U5C">
+                                <rect key="frame" x="911" y="565" width="69" height="32"/>
+                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3cJ-5y-pRz">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="goToNext:" target="XfG-lQ-9wD" id="e01-t6-5ZZ"/>
+                                </connections>
+                            </button>
+                            <slider toolTip="Move To Image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GMj-m3-tjp">
+                                <rect key="frame" x="18" y="550" width="964" height="19"/>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="eQe-Q7-thO">
+                                    <connections>
+                                        <action selector="indexSliderMoved:" target="XfG-lQ-9wD" id="sY0-gf-hHi"/>
+                                    </connections>
+                                </sliderCell>
+                            </slider>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-8d-pVW">
+                                <rect key="frame" x="190" y="565" width="135" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start Slideshow" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vnj-lK-NEu">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="slideShowClicked:" target="XfG-lQ-9wD" id="Dbo-Dg-Xbg"/>
+                                </connections>
+                            </button>
+                            <slider toolTip="SlideShow speed" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-ye-LG1">
+                                <rect key="frame" x="325" y="564" width="475" height="24"/>
+                                <sliderCell key="cell" continuous="YES" alignment="left" minValue="-200" maxValue="200" doubleValue="29.999999999999996" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="LOg-8l-hHp"/>
+                                <connections>
+                                    <action selector="fpsSliderMoved:" target="XfG-lQ-9wD" id="8zO-g6-NZA"/>
+                                </connections>
+                            </slider>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0y-jk-Fyr">
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="547"/>
                                 <clipView key="contentView" id="vrB-Bz-54z">
@@ -718,80 +771,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GRo-az-Qzh">
-                                <rect key="frame" x="18" y="555" width="964" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CurrentIndex" placeholderString="CurrentIndex" id="Csq-eb-8oV">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jGf-BX-UBm">
-                                <rect key="frame" x="800" y="548" width="93" height="32"/>
-                                <buttonCell key="cell" type="push" title="Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4FB-mf-na1">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="goToPrev:" target="XfG-lQ-9wD" id="qKs-P3-kCJ"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9mX-BG-U5C">
-                                <rect key="frame" x="911" y="548" width="69" height="32"/>
-                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3cJ-5y-pRz">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="goToNext:" target="XfG-lQ-9wD" id="e01-t6-5ZZ"/>
-                                </connections>
-                            </button>
-                            <slider toolTip="Move To Image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GMj-m3-tjp">
-                                <rect key="frame" x="18" y="575" width="964" height="19"/>
-                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="eQe-Q7-thO">
-                                    <connections>
-                                        <action selector="indexSliderMoved:" target="XfG-lQ-9wD" id="sY0-gf-hHi"/>
-                                    </connections>
-                                </sliderCell>
-                            </slider>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-8d-pVW">
-                                <rect key="frame" x="190" y="548" width="135" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start Slideshow" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vnj-lK-NEu">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="slideShowClicked:" target="XfG-lQ-9wD" id="Dbo-Dg-Xbg"/>
-                                </connections>
-                            </button>
-                            <slider toolTip="SlideShow speed" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-ye-LG1">
-                                <rect key="frame" x="325" y="547" width="475" height="24"/>
-                                <sliderCell key="cell" continuous="YES" alignment="left" minValue="-200" maxValue="200" doubleValue="29.999999999999996" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="LOg-8l-hHp"/>
-                                <connections>
-                                    <action selector="fpsSliderMoved:" target="XfG-lQ-9wD" id="8zO-g6-NZA"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="GRo-az-Qzh" firstAttribute="centerX" secondItem="o0y-jk-Fyr" secondAttribute="centerX" id="1yB-FQ-tG8"/>
+                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="centerX" secondItem="GMj-m3-tjp" secondAttribute="centerX" id="07p-EG-CxC"/>
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="baseline" secondItem="jGf-BX-UBm" secondAttribute="baseline" id="Cvr-Qw-lOY"/>
                             <constraint firstItem="GRo-az-Qzh" firstAttribute="bottom" secondItem="jGf-BX-UBm" secondAttribute="bottom" id="DCc-QU-71z"/>
-                            <constraint firstItem="GMj-m3-tjp" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="8" id="Io3-4z-uoi"/>
+                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="EPj-wQ-4vH"/>
+                            <constraint firstItem="GMj-m3-tjp" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="33" id="Io3-4z-uoi"/>
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="196" id="JJf-xP-04B"/>
                             <constraint firstItem="jGf-BX-UBm" firstAttribute="baseline" secondItem="9mX-BG-U5C" secondAttribute="baseline" id="K50-sK-vRV"/>
-                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="GRo-az-Qzh" secondAttribute="bottom" constant="8" symbolic="YES" id="NSz-El-wEd"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="leading" secondItem="GRo-az-Qzh" secondAttribute="leading" id="TZU-06-wAw"/>
                             <constraint firstAttribute="trailing" secondItem="GMj-m3-tjp" secondAttribute="trailing" constant="20" symbolic="YES" id="U8g-jO-t4J"/>
-                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="UDN-Fc-bU9"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="leading" secondItem="kcX-8d-pVW" secondAttribute="trailing" constant="8" symbolic="YES" id="WUW-HT-6oi"/>
-                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" id="ZeU-BX-nVJ"/>
-                            <constraint firstItem="lTA-ye-LG1" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="8" symbolic="YES" id="bAH-oY-sIP"/>
+                            <constraint firstItem="lTA-ye-LG1" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="-34" id="bAH-oY-sIP"/>
+                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="53" id="c4n-d8-AfN"/>
                             <constraint firstItem="jGf-BX-UBm" firstAttribute="leading" secondItem="lTA-ye-LG1" secondAttribute="trailing" constant="8" symbolic="YES" id="foJ-8K-zDw"/>
+                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" id="h9F-EG-aRp"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="lGs-AD-gHr"/>
                             <constraint firstItem="9mX-BG-U5C" firstAttribute="leading" secondItem="jGf-BX-UBm" secondAttribute="trailing" constant="30" id="otb-VA-pHZ"/>
                             <constraint firstAttribute="trailing" secondItem="9mX-BG-U5C" secondAttribute="trailing" constant="26" id="qYV-I7-Ist"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="trailing" secondItem="GRo-az-Qzh" secondAttribute="trailing" id="sqS-FU-87b"/>
-                            <constraint firstItem="GRo-az-Qzh" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="28" id="z3h-M8-2U9"/>
+                            <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="5" id="ymr-x8-hig"/>
+                            <constraint firstItem="GRo-az-Qzh" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="11" id="z3h-M8-2U9"/>
                         </constraints>
                     </view>
                     <connections>
