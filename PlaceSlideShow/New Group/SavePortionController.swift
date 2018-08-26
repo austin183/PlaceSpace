@@ -13,6 +13,7 @@ class SavePortionController: NSViewController {
     private var gifWriter:GifWriter = GifWriter()
     var place:Place?
     
+    @IBOutlet weak var scale: NSTextField!
     
     @IBOutlet weak var xValue: NSTextField!
     @IBOutlet weak var yValue: NSTextField!
@@ -35,6 +36,7 @@ class SavePortionController: NSViewController {
         xValue.integerValue = 0
         width.integerValue = 0
         height.integerValue = 0
+        scale.doubleValue = 1.0
         validateRange()
     }
     
@@ -133,7 +135,7 @@ class SavePortionController: NSViewController {
         
         panel.beginSheetModal(for: self.view.window!, completionHandler: { num in
             if num == NSApplication.ModalResponse.OK {
-                self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!)
+                self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue)
             } else {
                 print("nothing chosen")
             }

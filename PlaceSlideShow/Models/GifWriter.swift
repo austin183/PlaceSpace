@@ -39,7 +39,7 @@ class GifWriter{
         }
     }
     
-    func writeGif(destinationPath:URL, place:Place){
+    func writeGif(destinationPath:URL, place:Place, scale:Double){
         var images:[URL] = []
         for index:Int in start...stop{
             if (skipFrames == 0 || index % skipFrames == 0) {
@@ -53,10 +53,6 @@ class GifWriter{
         // The final size of your GIF. This is an optional parameter
         var rect = NSMakeRect(0, 0, 1000, 1000)
         var cropRect:NSRect?
-        if(useCrop){
-            cropRect = NSMakeRect(CGFloat(xValue), CGFloat(yValue), CGFloat(width), CGFloat(height))
-        }
-        
         // This dictionary controls the delay between frames
         // If you don't specify this, CGImage will apply a default delay
         let properties = [
@@ -67,17 +63,37 @@ class GifWriter{
             // Convert an NSImage to CGImage, fitting within the specified rect
             // You can replace `&rect` with nil
             let image = NSImage(contentsOf: img)
+            
             let cgImage = image!.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
+            var finalImage:CGImage = cgImage
             if(useCrop){
-                let croppedImage = cgImage.cropping(to: cropRect!)
-                CGImageDestinationAddImage(destinationGIF, croppedImage!, properties as CFDictionary)
+                cropRect = NSMakeRect(CGFloat(xValue), CGFloat(yValue), CGFloat(width), CGFloat(height))
+                finalImage = cgImage.cropping(to: cropRect!)!
             }
-            else{
-                CGImageDestinationAddImage(destinationGIF, cgImage, properties as CFDictionary)
+            if(scale != 1.0){
+                finalImage = getResizedImage(image: finalImage, scale: scale)!
             }
+            CGImageDestinationAddImage(destinationGIF, finalImage, properties as CFDictionary)
         }
         
         // Write the GIF file to disk
         CGImageDestinationFinalize(destinationGIF)
+    }
+    
+    private func getResizedImage(image:CGImage, scale:Double) -> CGImage?{
+        let imageToScale = NSImage(cgImage: image, size: NSSize(width: image.width, height: image.height))
+        let newWidth = CGFloat(Double(image.width) * scale)
+        let newHeight = CGFloat(Double(image.height) * scale)
+        let resizedRect = NSRect(x: 0, y: 0, width: newWidth, height: newHeight)
+        var resizedCGRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+        let newSize = NSSize(width: newWidth, height: newHeight)
+        guard let representation = imageToScale.bestRepresentation(for: resizedRect, context: nil, hints: nil) else {
+            return nil
+        }
+        let image = NSImage(size: newSize, flipped: false, drawingHandler: { (_) -> Bool in
+            return representation.draw(in: resizedRect)
+        })
+        
+        return image.cgImage(forProposedRect: &resizedCGRect, context: nil, hints: nil)!
     }
 }
