@@ -11,20 +11,21 @@ import Cocoa
 
 class SavePortionController: NSViewController {
     private var gifWriter:GifWriter = GifWriter()
+    private var mostRecentGif:URL? = nil
     var place:Place?
     
     @IBOutlet weak var scale: NSTextField!
-    
     @IBOutlet weak var xValue: NSTextField!
     @IBOutlet weak var yValue: NSTextField!
-    
     @IBOutlet weak var height: NSTextField!
     @IBOutlet weak var width: NSTextField!
     @IBOutlet weak var stopIndex: NSTextField!
     @IBOutlet weak var startIndex: NSTextField!
     @IBOutlet weak var skipFrames: NSTextField!
-
     @IBOutlet weak var gifFps: NSTextField!
+    
+    @IBOutlet weak var openLastGif: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
@@ -40,6 +41,16 @@ class SavePortionController: NSViewController {
         validateRange()
     }
     
+    @IBAction func openLastGifClicked(_ sender: NSButton) {
+        let fileManager = FileManager.default
+        if(mostRecentGif == nil) { return }
+        if fileManager.fileExists(atPath: mostRecentGif!.path) {
+            
+            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: mostRecentGif!.deletingLastPathComponent().path)
+        } else {
+            return
+        }
+    }
     @IBAction func topLeftXChanged(_ sender: NSTextField) {
         _ = validateCropRectangleCoordinates()
     }
@@ -137,9 +148,13 @@ class SavePortionController: NSViewController {
             if num == NSApplication.ModalResponse.OK {
                 let backingScale = self.view.window?.backingScaleFactor
                 self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
+                self.mostRecentGif = panel.url!
+                self.openLastGif.isHidden = false
             } else {
                 print("nothing chosen")
             }
         })
+        
+        
     }
 }
