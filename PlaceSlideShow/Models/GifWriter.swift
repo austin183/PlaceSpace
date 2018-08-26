@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+
 protocol GifWritingProtocol{
     func currentIndexToWrite(_ gifWriter: GifWriter, currentIndex:Int, count:Int)
 }
@@ -39,7 +40,7 @@ class GifWriter{
         }
     }
     
-    func writeGif(destinationPath:URL, place:Place, scale:Double){
+    func writeGif(destinationPath:URL, place:Place, scale:Double, backingScale:CGFloat){
         var images:[URL] = []
         for index:Int in start...stop{
             if (skipFrames == 0 || index % skipFrames == 0) {
@@ -70,8 +71,14 @@ class GifWriter{
                 cropRect = NSMakeRect(CGFloat(xValue), CGFloat(yValue), CGFloat(width), CGFloat(height))
                 finalImage = cgImage.cropping(to: cropRect!)!
             }
+            
             if(scale != 1.0){
-                finalImage = getResizedImage(image: finalImage, scale: scale)!
+                var finalScale:Double = scale
+                if(backingScale != 1.0){
+                    finalScale = scale / Double(backingScale)
+                }
+                
+                finalImage = getResizedImage(image: finalImage, scale: finalScale)!
             }
             CGImageDestinationAddImage(destinationGIF, finalImage, properties as CFDictionary)
         }
@@ -81,6 +88,7 @@ class GifWriter{
     }
     
     private func getResizedImage(image:CGImage, scale:Double) -> CGImage?{
+        
         let imageToScale = NSImage(cgImage: image, size: NSSize(width: image.width, height: image.height))
         let newWidth = CGFloat(Double(image.width) * scale)
         let newHeight = CGFloat(Double(image.height) * scale)
@@ -93,6 +101,7 @@ class GifWriter{
         let image = NSImage(size: newSize, flipped: false, drawingHandler: { (_) -> Bool in
             return representation.draw(in: resizedRect)
         })
+        
         
         return image.cgImage(forProposedRect: &resizedCGRect, context: nil, hints: nil)!
     }

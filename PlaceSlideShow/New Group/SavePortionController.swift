@@ -135,7 +135,8 @@ class SavePortionController: NSViewController {
         
         panel.beginSheetModal(for: self.view.window!, completionHandler: { num in
             if num == NSApplication.ModalResponse.OK {
-                self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue)
+                let backingScale = self.view.window?.backingScaleFactor
+                self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
             } else {
                 print("nothing chosen")
             }
