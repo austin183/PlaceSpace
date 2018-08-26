@@ -1,5 +1,8 @@
 # PlaceSpace
-A space to explore r/place, for macOs in Swift
+A space to explore and share r/place, for macOs in Swift
+ and supporting tools
+ 
+More information can be found on https://github.com/austin183/PlaceSpace/wiki/PlaceSpace-Home
 
 This app is a picture viewer specifically designed to show large quantities of PNG files as a slideshow or by dragging along timeline to see each picture individually.  It works really well with the png files from
 
