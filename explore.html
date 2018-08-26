@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+		<script src="https://cdn.jsdelivr.net/mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.panzoom/3.2.2/jquery.panzoom.min.js"></script>
+
+		<script>
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+var imgs = [];
+var counter = 1;
+//Change maxImages to match the last numbered file in the place png file set
+//You can also optionally set the number as a URL paramater, like explore.html?maxImages=30054
+var maxImages = 300;
+if(getUrlParameter('maxImages').trim().length > 0){
+	maxImages = getUrlParameter('maxImages');
+}
+while(counter <= maxImages){
+	var suffix = "0000000";
+	var imageFileName = "test/image_" + (suffix + counter).substr((suffix + counter).length - 6) + ".png"
+	imgs.push(imageFileName);
+	counter++;
+}
+</script>
+		<style>
+body {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+			      supported by Chrome and Opera */
+	
+	overflow: hidden;
+	height: 100%;
+}
+
+html {
+	overflow: hidden;
+	height: 100%;
+}
+
+	h3 {
+		margin: 4px;
+	}
+
+	p {
+		margin: 4px;
+	}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+	<body>
+		<h3>Move slider to travel through time!</h3>
+		<p>Modified from work done by /u/JJJollyjim.</p>
+		<div class="controls">
+			<input style="width:90%" name="timemachine" id="timemachine" type="range" value="0" min="0" max="0"/>
+		</div>
+		<section id="focal">
+			<div class="parent">
+				<div class="panzoom">
+					<img id="image" style="-ms-interpolation-mode: nearest-neighbor; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; image-rendering: pixelated" src="">
+				</div>
+			</div>
+
+			<script>
+(function() {
+	var $section = $('#focal');
+	var $panzoom = $section.find('.panzoom').panzoom({
+		linearZoom: false
+	});
+	$panzoom.parent().on('mousewheel.focal', function( e ) {
+		e.preventDefault();
+		var delta = e.delta || e.originalEvent.wheelDelta;
+		var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+		$panzoom.panzoom('zoom', zoomOut, {
+			increment: 0.04,
+			animate: false,
+			focal: e,
+			linearZoom: false
+		});
+	});
+})();
+
+$("#timemachine").attr("max", imgs.length - 1);
+$("#timemachine").attr("min", 1);
+$("#timemachine").change(update);
+$("#timemachine").mousemove(update);
+function update() {
+	var img = imgs[$("#timemachine").val()];
+	if ($("#image").attr("src") !== img) {
+		$("#image").attr("src", img);
+		$("#loader")
+	}
+}
+update();
+			</script>
+		</section>
+	</body>
+</html>
