@@ -109,8 +109,7 @@ class ViewController: NSViewController {
         }
     }
     
-    func setPlaceDirectory(){
-        let defaults = UserDefaults.standard
+    func setPlaceDirectory(defaults:UserDefaults){
         let defaultDirectory = defaults.url(forKey: "defaultDirectory")
         if(defaultDirectory != nil){
             placeDirectory = defaultDirectory!
@@ -128,15 +127,26 @@ class ViewController: NSViewController {
         }
         else{
             defaults.set(nil, forKey:"defaultDirectory")
-            setPlaceDirectory()
+            setPlaceDirectory(defaults: defaults)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setPlaceDirectory()
+        let defaults = UserDefaults.standard
+        let defaultFPS = defaults.integer(forKey: "startingFPS")
+        let defaultImageIndex = defaults.integer(forKey: "startingIndex")
+
+        setPlaceDirectory(defaults: defaults)
         let appDelegate = NSApp.delegate as! AppDelegate
         appDelegate.setPlace(placeToSet:place)
+        if(defaultFPS > 0){
+            slideShowFPS.integerValue = defaultFPS
+        }
+        if(defaultImageIndex > 0){
+            place.setContentsIndex(index: defaultImageIndex)
+            imageSlider.integerValue = defaultImageIndex
+        }
         updateUI(index: place.getContentsIndex())
         place.delegate = self
     }
