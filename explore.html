@@ -60,9 +60,9 @@ html {
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	</head>
 	<body>
-		<h3>Move slider to travel through time!</h3>
 		<p>Modified from work done by /u/JJJollyjim.</p>
 		<div class="controls">
+			<button type="button" id="slideShow">Toggle Slideshow</button><input id="fps" value="60" />
 			<input style="width:90%" name="timemachine" id="timemachine" type="range" value="0" min="0" max="0"/>
 		</div>
 		<section id="focal">
@@ -90,11 +90,27 @@ html {
 		});
 	});
 })();
-
+var interval = null;
 $("#timemachine").attr("max", imgs.length - 1);
 $("#timemachine").attr("min", 1);
 $("#timemachine").change(update);
 $("#timemachine").mousemove(update);
+$("#slideShow").click(toggleSlideShow);
+function toggleSlideShow(){
+	if(interval == null){
+		var fpsValue = parseFloat($("#fps").val());
+		interval = setInterval(function(){
+			var timemachineValue = $("#timemachine").val();
+			var newValue = parseInt(timemachineValue) + 1
+			$("#timemachine").val(newValue);
+			update();
+		}, 1/fpsValue);
+	}
+	else{
+		clearInterval(interval);
+		interval = null;
+	}
+}
 function update() {
 	var img = imgs[$("#timemachine").val()];
 	if ($("#image").attr("src") !== img) {
