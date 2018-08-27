@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class ViewController: NSViewController {
+class MainViewController: NSViewController {
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
     
@@ -204,7 +204,7 @@ class ViewController: NSViewController {
 
 
 }
-extension ViewController:PlaceSlideshowProtocol{
+extension MainViewController:PlaceSlideshowProtocol{
     func currentContents(_ place: Place, index:Int){
         updateUI(index:index)
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -690,7 +689,7 @@
         <!--Place Viewer-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="Place Viewer" id="XfG-lQ-9wD" customClass="ViewController" customModule="PlaceSlideShow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Place Viewer" id="XfG-lQ-9wD" customClass="MainViewController" customModule="PlaceSlideShow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -752,7 +751,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="547"/>
                                 <clipView key="contentView" id="vrB-Bz-54z">
                                     <rect key="frame" x="1" y="1" width="998" height="545"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Olg-lX-Cix">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
