@@ -13,10 +13,17 @@ class MainViewController: NSViewController {
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
     
-    @IBOutlet weak var infoBarMessage: NSTextField!
+    @IBOutlet weak var fpsText: NSTextField!
+    
+    @IBOutlet weak var scale: NSTextField!
+    @IBOutlet weak var height: NSTextField!
+    @IBOutlet weak var width: NSTextField!
+    @IBOutlet weak var originY: NSTextField!
+    @IBOutlet weak var originX: NSTextField!
+    @IBOutlet weak var totalCount: NSTextField!
+    @IBOutlet weak var currentIndex: NSTextField!
     @IBOutlet weak var slideShowFPS: NSSlider!
     @IBOutlet weak var imageSlider: NSSliderCell!
-    @IBOutlet weak var currentIndex: NSTextField!
     @IBOutlet weak var placeScrollView: NSScrollView!
     @IBOutlet weak var placeImage: NSImageView!
     @IBOutlet weak var btnSlideShow: NSButton!
@@ -68,13 +75,6 @@ class MainViewController: NSViewController {
     @IBAction func openImageInPreviewMenuItemSelected(_ sender:NSMenuItem){
         let contentsURL:URL = place.getContentAtIndex(index: place.getContentsIndex())
         NSWorkspace.shared.openFile(contentsURL.absoluteString, withApplication: "Preview")
-    }
-    
-    @IBAction func goToPrev(_ sender: NSButton) {
-        goToPreviousImage()
-    }
-    @IBAction func goToNext(_ sender: NSButton) {
-        goToNextImage()
     }
     
     @IBAction func indexSliderMoved(_ sender: NSSliderCell) {
@@ -156,30 +156,35 @@ class MainViewController: NSViewController {
         updateUI(index: place.getContentsIndex())
         
         NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved]) {
-            self.updateInfoBar()
+            self.updateFrameVisibleRect()
             return $0
         }
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateInfoBar),
+            selector: #selector(updateFrameVisibleRect),
             name: NSScrollView.didLiveScrollNotification,
             object: placeScrollView
         )
     }
     
     override func viewDidAppear() {
-        updateInfoBar()
+        updateFrameVisibleRect()
     }
 
-    @objc func updateInfoBar(){
-        infoBarMessage.stringValue = "Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription))."
+    @objc func updateFrameVisibleRect(){
+        let vr:NSRect = placeImage.visibleRect
+        originX.integerValue = Int(vr.origin.x)
+        originY.integerValue = Int(vr.origin.y)
+        width.integerValue = Int(vr.width)
+        height.integerValue = Int(vr.height)
+        print("Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription)).")
     }
     
     func updateUI(index:Int){
         updateCurrentIndexLabel(index: index)
         updateImageWithContent(index: index)
-        updateInfoBar()
+        updateFrameVisibleRect()
     }
     
     func updateSlideShowLabel(isSlideShowGoing:Bool){
@@ -193,7 +198,8 @@ class MainViewController: NSViewController {
     
     func updateCurrentIndexLabel(index:Int){
         imageSlider.integerValue = index
-        currentIndex.stringValue = "\(index) out of \(place.getContentsCount())"
+        currentIndex.integerValue = index
+        totalCount.integerValue = place.getContentsCount()
     }
     
     func updateImageWithContent(index:Int){

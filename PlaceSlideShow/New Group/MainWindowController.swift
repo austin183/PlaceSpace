@@ -19,7 +19,7 @@ class MainWindowController: NSWindowController {
     }
     
     @objc func windowDidResize(_ notification: Notification) {
-        mainViewController?.updateInfoBar()
+        mainViewController?.updateFrameVisibleRect()
     }
     
 }
