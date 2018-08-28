@@ -159,13 +159,20 @@ class MainViewController: NSViewController {
             self.updateInfoBar()
             return $0
         }
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateInfoBar),
+            name: NSScrollView.didLiveScrollNotification,
+            object: placeScrollView
+        )
     }
     
     override func viewDidAppear() {
         updateInfoBar()
     }
 
-    func updateInfoBar(){
+    @objc func updateInfoBar(){
         infoBarMessage.stringValue = "Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription))."
     }
     

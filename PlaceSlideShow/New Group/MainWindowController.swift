@@ -17,7 +17,8 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         setMainViewController(vc: self.contentViewController as! MainViewController)
     }
-    func windowDidResize(_ notification: Notification) {
+    
+    @objc func windowDidResize(_ notification: Notification) {
         mainViewController?.updateInfoBar()
     }
     
