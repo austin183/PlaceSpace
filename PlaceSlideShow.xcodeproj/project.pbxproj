@@ -17,6 +17,7 @@
 		D9BBEF27212B6A18000E8E7A /* GifWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BBEF26212B6A18000E8E7A /* GifWriter.swift */; };
 		D9C2A0D021322DDE00EB9FB2 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */; };
 		D9E288DF21289AC6007C56B3 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E288DE21289AC6007C56B3 /* Place.swift */; };
+		D9EACCC92135F593000C6DBE /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EACCC82135F593000C6DBE /* MainWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		D9E288DE21289AC6007C56B3 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		D9E288E02128D30F007C56B3 /* PlaceSlideShow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaceSlideShow.entitlements; sourceTree = "<group>"; };
+		D9EACCC82135F593000C6DBE /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				D95FB4DB1EAEC85B00B8C551 /* MainViewController.swift */,
 				D93FFD80212A1E9700BC6CBF /* SavePortionController.swift */,
 				D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */,
+				D9EACCC82135F593000C6DBE /* MainWindowController.swift */,
 			);
 			name = Controllers;
 			path = "New Group";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9EACCC92135F593000C6DBE /* MainWindowController.swift in Sources */,
 				D9BBEF27212B6A18000E8E7A /* GifWriter.swift in Sources */,
 				D93FFD81212A1E9700BC6CBF /* SavePortionController.swift in Sources */,
 				D9E288DF21289AC6007C56B3 /* Place.swift in Sources */,

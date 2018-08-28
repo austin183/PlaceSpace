@@ -164,8 +164,6 @@ class MainViewController: NSViewController {
     override func viewDidAppear() {
         updateInfoBar()
     }
-    
-    
 
     func updateInfoBar(){
         infoBarMessage.stringValue = "Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription))."
