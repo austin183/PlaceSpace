@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -285,6 +286,7 @@
                                                 <action selector="slideShowMenuItemSelected:" target="Ady-hI-5gd" id="eI6-pX-XSP"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="otY-Uz-ugL"/>
                                         <menuItem title="Zoom Out" keyEquivalent="" id="RXy-Fd-bGk">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -301,6 +303,12 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="zoomToFitMenuItemSelected:" target="Ady-hI-5gd" id="JJI-I1-srR"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Up" keyEquivalent="w" id="mRZ-uq-fiy">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveUpMenuItemSelected:" target="Ady-hI-5gd" id="X6w-TE-ZBZ"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
@@ -691,11 +699,11 @@
             <objects>
                 <viewController title="Place Viewer" id="XfG-lQ-9wD" customClass="MainViewController" customModule="PlaceSlideShow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="629"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GRo-az-Qzh">
-                                <rect key="frame" x="18" y="572" width="964" height="17"/>
+                                <rect key="frame" x="18" y="601" width="964" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CurrentIndex" placeholderString="CurrentIndex" id="Csq-eb-8oV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -703,7 +711,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jGf-BX-UBm">
-                                <rect key="frame" x="800" y="565" width="93" height="32"/>
+                                <rect key="frame" x="800" y="594" width="93" height="32"/>
                                 <buttonCell key="cell" type="push" title="Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4FB-mf-na1">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -713,7 +721,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9mX-BG-U5C">
-                                <rect key="frame" x="911" y="565" width="69" height="32"/>
+                                <rect key="frame" x="911" y="594" width="69" height="32"/>
                                 <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3cJ-5y-pRz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -723,7 +731,7 @@
                                 </connections>
                             </button>
                             <slider toolTip="Move To Image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GMj-m3-tjp">
-                                <rect key="frame" x="18" y="550" width="964" height="19"/>
+                                <rect key="frame" x="18" y="579" width="964" height="19"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="eQe-Q7-thO">
                                     <connections>
                                         <action selector="indexSliderMoved:" target="XfG-lQ-9wD" id="sY0-gf-hHi"/>
@@ -731,7 +739,7 @@
                                 </sliderCell>
                             </slider>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-8d-pVW">
-                                <rect key="frame" x="190" y="565" width="135" height="32"/>
+                                <rect key="frame" x="190" y="594" width="135" height="32"/>
                                 <buttonCell key="cell" type="push" title="Start Slideshow" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vnj-lK-NEu">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -741,17 +749,17 @@
                                 </connections>
                             </button>
                             <slider toolTip="SlideShow speed" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-ye-LG1">
-                                <rect key="frame" x="325" y="564" width="475" height="24"/>
+                                <rect key="frame" x="325" y="593" width="475" height="24"/>
                                 <sliderCell key="cell" continuous="YES" alignment="left" minValue="-200" maxValue="200" doubleValue="29.999999999999996" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="LOg-8l-hHp"/>
                                 <connections>
                                     <action selector="fpsSliderMoved:" target="XfG-lQ-9wD" id="8zO-g6-NZA"/>
                                 </connections>
                             </slider>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0y-jk-Fyr">
-                                <rect key="frame" x="0.0" y="0.0" width="1000" height="547"/>
+                                <rect key="frame" x="0.0" y="20" width="1000" height="556"/>
                                 <clipView key="contentView" id="vrB-Bz-54z">
-                                    <rect key="frame" x="1" y="1" width="998" height="545"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="1" y="1" width="998" height="554"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Olg-lX-Cix">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -775,20 +783,29 @@
                                     </constraints>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Sda-fa-nX6">
-                                    <rect key="frame" x="1" y="530" width="998" height="16"/>
+                                    <rect key="frame" x="1" y="539" width="998" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="KNj-Qb-VxM">
-                                    <rect key="frame" x="983" y="1" width="16" height="545"/>
+                                    <rect key="frame" x="983" y="1" width="16" height="554"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qpk-f0-VKU">
+                                <rect key="frame" x="20" y="3" width="27" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Info" id="azi-Av-2mG">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="centerX" secondItem="GMj-m3-tjp" secondAttribute="centerX" id="07p-EG-CxC"/>
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="baseline" secondItem="jGf-BX-UBm" secondAttribute="baseline" id="Cvr-Qw-lOY"/>
                             <constraint firstItem="GRo-az-Qzh" firstAttribute="bottom" secondItem="jGf-BX-UBm" secondAttribute="bottom" id="DCc-QU-71z"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="EPj-wQ-4vH"/>
+                            <constraint firstItem="qpk-f0-VKU" firstAttribute="top" secondItem="o0y-jk-Fyr" secondAttribute="bottom" id="EVs-dF-IiP"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="33" id="Io3-4z-uoi"/>
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="196" id="JJf-xP-04B"/>
                             <constraint firstItem="jGf-BX-UBm" firstAttribute="baseline" secondItem="9mX-BG-U5C" secondAttribute="baseline" id="K50-sK-vRV"/>
@@ -796,9 +813,10 @@
                             <constraint firstAttribute="trailing" secondItem="GMj-m3-tjp" secondAttribute="trailing" constant="20" symbolic="YES" id="U8g-jO-t4J"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="leading" secondItem="kcX-8d-pVW" secondAttribute="trailing" constant="8" symbolic="YES" id="WUW-HT-6oi"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="-34" id="bAH-oY-sIP"/>
+                            <constraint firstItem="qpk-f0-VKU" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="22" id="c2N-Sx-GsV"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="53" id="c4n-d8-AfN"/>
                             <constraint firstItem="jGf-BX-UBm" firstAttribute="leading" secondItem="lTA-ye-LG1" secondAttribute="trailing" constant="8" symbolic="YES" id="foJ-8K-zDw"/>
-                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" id="h9F-EG-aRp"/>
+                            <constraint firstAttribute="bottom" secondItem="o0y-jk-Fyr" secondAttribute="bottom" constant="20" id="h9F-EG-aRp"/>
                             <constraint firstItem="GMj-m3-tjp" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="lGs-AD-gHr"/>
                             <constraint firstItem="9mX-BG-U5C" firstAttribute="leading" secondItem="jGf-BX-UBm" secondAttribute="trailing" constant="30" id="otb-VA-pHZ"/>
                             <constraint firstAttribute="trailing" secondItem="9mX-BG-U5C" secondAttribute="trailing" constant="26" id="qYV-I7-Ist"/>
@@ -811,6 +829,7 @@
                         <outlet property="btnSlideShow" destination="kcX-8d-pVW" id="6dJ-57-p6O"/>
                         <outlet property="currentIndex" destination="GRo-az-Qzh" id="aSa-5v-7jr"/>
                         <outlet property="imageSlider" destination="eQe-Q7-thO" id="bQe-HA-bw4"/>
+                        <outlet property="infoBarMessage" destination="qpk-f0-VKU" id="54x-pU-TMV"/>
                         <outlet property="placeImage" destination="uMu-Sv-vX0" id="o9M-uL-Tl4"/>
                         <outlet property="placeScrollView" destination="o0y-jk-Fyr" id="XrT-a8-laq"/>
                         <outlet property="slideShowFPS" destination="lTA-ye-LG1" id="MJr-Na-w8h"/>
@@ -818,7 +837,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1219" y="486"/>
+            <point key="canvasLocation" x="1219" y="500.5"/>
         </scene>
     </scenes>
 </document>

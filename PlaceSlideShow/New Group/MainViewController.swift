@@ -13,6 +13,7 @@ class MainViewController: NSViewController {
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
     
+    @IBOutlet weak var infoBarMessage: NSTextField!
     @IBOutlet weak var slideShowFPS: NSSlider!
     @IBOutlet weak var imageSlider: NSSliderCell!
     @IBOutlet weak var currentIndex: NSTextField!
@@ -26,6 +27,10 @@ class MainViewController: NSViewController {
     
     @IBAction func slideShowClicked(_ sender: NSButton) {
         toggleSlideShow()
+    }
+    
+    @IBAction func moveUpMenuItemSelected(_ sender:NSMenuItem){
+        
     }
     
     @IBAction func zoomToFitMenuItemSelected(_ sender:NSMenuItem){
@@ -147,13 +152,29 @@ class MainViewController: NSViewController {
             place.setContentsIndex(index: defaultImageIndex)
             imageSlider.integerValue = defaultImageIndex
         }
-        updateUI(index: place.getContentsIndex())
         place.delegate = self
+        updateUI(index: place.getContentsIndex())
+        
+        NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved]) {
+            self.updateInfoBar()
+            return $0
+        }
+    }
+    
+    override func viewDidAppear() {
+        updateInfoBar()
+    }
+    
+    
+
+    func updateInfoBar(){
+        infoBarMessage.stringValue = "Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription))."
     }
     
     func updateUI(index:Int){
         updateCurrentIndexLabel(index: index)
         updateImageWithContent(index: index)
+        updateInfoBar()
     }
     
     func updateSlideShowLabel(isSlideShowGoing:Bool){
@@ -174,6 +195,7 @@ class MainViewController: NSViewController {
         let imagePath = place.getContentAtIndex(index: index)
         let image = NSImage(contentsOf: imagePath)
         placeImage.image = image
+        
     }
     
     fileprivate func toggleSlideShow() {
