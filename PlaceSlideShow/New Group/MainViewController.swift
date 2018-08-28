@@ -13,8 +13,9 @@ class MainViewController: NSViewController {
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
     
-    @IBOutlet weak var fpsText: NSTextField!
+    @IBOutlet weak var fps: NSTextField!
     
+    @IBOutlet weak var fpsSlider: NSSlider!
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var height: NSTextField!
     @IBOutlet weak var width: NSTextField!
@@ -30,6 +31,7 @@ class MainViewController: NSViewController {
     
     @IBAction func fpsSliderMoved(_ sender: NSSlider) {
         place.updateSlideShowInterval(slideShowFPS: sender.integerValue)
+        fps.integerValue = sender.integerValue
     }
     
     @IBAction func slideShowClicked(_ sender: NSButton) {
@@ -40,8 +42,13 @@ class MainViewController: NSViewController {
         
     }
     
+    private func setScaleDisplayValue(scale:CGFloat){
+        self.scale.stringValue = String(format: "%.1f", scale)
+    }
+    
     @IBAction func zoomToFitMenuItemSelected(_ sender:NSMenuItem){
         placeScrollView.magnify(toFit: (placeImage.image?.alignmentRect)!)
+        setScaleDisplayValue(scale: placeScrollView.magnification)
     }
     
     @IBAction func zoomOutMenuItemClicked(_ sender:NSMenuItem){
@@ -50,6 +57,7 @@ class MainViewController: NSViewController {
         if(placeScrollView.magnification - magnificationDecrement >= placeScrollView.minMagnification){
             placeScrollView.magnification = placeScrollView.magnification - magnificationDecrement
         }
+        setScaleDisplayValue(scale: placeScrollView.magnification)
     }
     
     @IBAction func zoomInMenuItemClicked(_ sender:NSMenuItem){
@@ -58,6 +66,7 @@ class MainViewController: NSViewController {
         if(placeScrollView.magnification + magnificationIncrement <= placeScrollView.maxMagnification){
             placeScrollView.magnification = placeScrollView.magnification + magnificationIncrement
         }
+        setScaleDisplayValue(scale: placeScrollView.magnification)
     }
     
     @IBAction func previousMenuItemSelected(_ sender: NSMenuItem) {
@@ -166,6 +175,8 @@ class MainViewController: NSViewController {
             name: NSScrollView.didLiveScrollNotification,
             object: placeScrollView
         )
+        fps.integerValue = fpsSlider.integerValue
+        setScaleDisplayValue(scale: placeScrollView.magnification)
     }
     
     override func viewDidAppear() {
@@ -178,7 +189,6 @@ class MainViewController: NSViewController {
         originY.integerValue = Int(vr.origin.y)
         width.integerValue = Int(vr.width)
         height.integerValue = Int(vr.height)
-        print("Currently Visible portion: \(String(describing: placeImage.visibleRect.debugDescription)).")
     }
     
     func updateUI(index:Int){
