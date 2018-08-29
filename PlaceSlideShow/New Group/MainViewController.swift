@@ -10,6 +10,7 @@ import Cocoa
 
 
 class MainViewController: NSViewController {
+    var timer: Timer? = nil
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
     
@@ -164,37 +165,75 @@ class MainViewController: NSViewController {
         place.delegate = self
         updateUI(index: place.getContentsIndex())
         
-        NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved]) {
-            self.updateFrameVisibleRect()
-            return $0
-        }
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateFrameVisibleRect),
             name: NSScrollView.didLiveScrollNotification,
             object: placeScrollView
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(startUpdateUITimer),
+            name: NSScrollView.willStartLiveMagnifyNotification,
+            object: placeScrollView
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(stopUpdateUITimer),
+            name: NSScrollView.didEndLiveMagnifyNotification,
+            object: placeScrollView
+        )
         fps.integerValue = fpsSlider.integerValue
         setScaleDisplayValue(scale: placeScrollView.magnification)
+    }
+    
+    @objc func updateMagnification(){
+        setScaleDisplayValue(scale: placeScrollView.magnification)
+        updateFrameVisibleRect()
     }
     
     override func viewDidAppear() {
         updateFrameVisibleRect()
     }
+    
+    @objc func startUpdateUITimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.01,
+                             target: self,
+                             selector: #selector(updateFramAndScale),
+                             userInfo: nil,
+                             repeats: true)
+    }
+    
+    @objc func stopUpdateUITimer(){
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func updateFramAndScale(){
+        updateFrameVisibleRect()
+        updateMagnification()
+    }
 
     @objc func updateFrameVisibleRect(){
         let vr:NSRect = placeImage.visibleRect
-        originX.integerValue = Int(vr.origin.x)
-        originY.integerValue = Int(vr.origin.y)
+        let x = vr.origin.x
+        var y = vr.origin.y
+        if(!placeImage.isFlipped){
+            y = placeImage.frame.size.height - vr.height - y
+        }
+        originX.integerValue = Int(x)
+        originY.integerValue = Int(y)
         width.integerValue = Int(vr.width)
         height.integerValue = Int(vr.height)
     }
     
-    func updateUI(index:Int){
+    @objc func updateUI(index:Int){
         updateCurrentIndexLabel(index: index)
         updateImageWithContent(index: index)
         updateFrameVisibleRect()
+        updateMagnification()
     }
     
     func updateSlideShowLabel(isSlideShowGoing:Bool){
