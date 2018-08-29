@@ -40,8 +40,20 @@ class MainViewController: NSViewController {
         toggleSlideShow()
     }
     
+    @IBAction func moveLeftMenuItemSelected(_ sender:NSMenuItem){
+        adjustScrollBy(x: -10.0, y: 0.0)
+    }
+    
+    @IBAction func moveRightMenuItemSelected(_ sender:NSMenuItem){
+        adjustScrollBy(x: 10.0, y: 0.0)
+    }
+    
+    @IBAction func moveDownMenuItemSelected(_ sender:NSMenuItem){
+        adjustScrollBy(x: 0.0, y: -10.0)
+    }
+    
     @IBAction func moveUpMenuItemSelected(_ sender:NSMenuItem){
-        
+        adjustScrollBy(x: 0.0, y: 10.0)
     }
     
     private func setScaleDisplayValue(scale:CGFloat){
@@ -108,6 +120,14 @@ class MainViewController: NSViewController {
             placeDirectory = currentPlaceDirectory
             place.buildPngContents(placeDirectory: placeDirectory)
         }
+    }
+    
+    private func adjustScrollBy(x:CGFloat, y:CGFloat){
+        let rect:NSRect = placeScrollView.contentView.visibleRect
+        let x:CGFloat = rect.origin.x + x
+        let y:CGFloat = rect.origin.y + y
+        placeScrollView.contentView.scroll(to: NSPoint(x: x, y: y))
+        updateFrameVisibleRect()
     }
     
     fileprivate func getUserSelectedPlaceDirectory() {

@@ -312,6 +312,24 @@
                                                 <action selector="moveUpMenuItemSelected:" target="Ady-hI-5gd" id="X6w-TE-ZBZ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Move Down" keyEquivalent="s" id="tNR-wj-ESi">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveDownMenuItemSelected:" target="Ady-hI-5gd" id="9A2-td-JJ4"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Left" keyEquivalent="a" id="9JR-Cq-EeT">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveLeftMenuItemSelected:" target="Ady-hI-5gd" id="PAp-91-pWn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Right" keyEquivalent="d" id="PTi-5b-You">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveRightMenuItemSelected:" target="Ady-hI-5gd" id="Gfb-eR-aMM"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask"/>
