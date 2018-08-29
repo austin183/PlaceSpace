@@ -13,6 +13,7 @@ class SavePortionController: NSViewController {
     private var gifWriter:GifWriter = GifWriter()
     private var mostRecentGif:URL? = nil
     var place:Place?
+    var dimensions:Dimensions?
     
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var xValue: NSTextField!
@@ -30,14 +31,27 @@ class SavePortionController: NSViewController {
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
         place = appDelegate.getPlace()
+        dimensions = appDelegate.getDimensions()
+        if(dimensions != nil){
+            yValue.integerValue = (dimensions?.originY)!
+            xValue.integerValue = (dimensions?.originX)!
+            width.integerValue = (dimensions?.width)!
+            height.integerValue = (dimensions?.height)!
+            scale.doubleValue = (dimensions!.scale as! NSString).doubleValue
+        }
+        else{
+            startIndex.integerValue = 0
+            stopIndex.integerValue = place!.getContentsCount()
+            gifFps.integerValue = 16
+            yValue.integerValue = 0
+            xValue.integerValue = 0
+            width.integerValue = 0
+            height.integerValue = 0
+            scale.doubleValue = 1.0
+        }
         startIndex.integerValue = 0
         stopIndex.integerValue = place!.getContentsCount()
         gifFps.integerValue = 16
-        yValue.integerValue = 0
-        xValue.integerValue = 0
-        width.integerValue = 0
-        height.integerValue = 0
-        scale.doubleValue = 1.0
         validateRange()
     }
     

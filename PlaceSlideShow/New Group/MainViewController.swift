@@ -13,6 +13,7 @@ class MainViewController: NSViewController {
     var timer: Timer? = nil
     private var placeDirectory:URL = URL(fileURLWithPath:"")
     private var place:Place = Place()
+    private var dimensions:Dimensions = Dimensions()
     
     @IBOutlet weak var fps: NSTextField!
     
@@ -155,6 +156,7 @@ class MainViewController: NSViewController {
         setPlaceDirectory(defaults: defaults)
         let appDelegate = NSApp.delegate as! AppDelegate
         appDelegate.setPlace(placeToSet:place)
+        appDelegate.setDimensions(dimensionsToSet: dimensions)
         if(defaultFPS > 0){
             slideShowFPS.integerValue = defaultFPS
         }
@@ -201,9 +203,19 @@ class MainViewController: NSViewController {
     @objc func startUpdateUITimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.01,
                              target: self,
-                             selector: #selector(updateFramAndScale),
+                             selector: #selector(updateFrameAndScale),
                              userInfo: nil,
                              repeats: true)
+    }
+    
+    func updateDimensions(){
+        dimensions.originX = originX.integerValue
+        dimensions.originY = originY.integerValue
+        dimensions.width = width.integerValue
+        dimensions.height = height.integerValue
+        dimensions.scale = scale.stringValue
+        let appDelegate = NSApp.delegate as! AppDelegate
+        appDelegate.setDimensions(dimensionsToSet: dimensions)
     }
     
     @objc func stopUpdateUITimer(){
@@ -211,9 +223,9 @@ class MainViewController: NSViewController {
         timer = nil
     }
     
-    @objc func updateFramAndScale(){
-        updateFrameVisibleRect()
+    @objc func updateFrameAndScale(){
         updateMagnification()
+        updateDimensions()
     }
 
     @objc func updateFrameVisibleRect(){
@@ -227,13 +239,13 @@ class MainViewController: NSViewController {
         originY.integerValue = Int(y)
         width.integerValue = Int(vr.width)
         height.integerValue = Int(vr.height)
+        updateDimensions()
     }
     
     @objc func updateUI(index:Int){
         updateCurrentIndexLabel(index: index)
         updateImageWithContent(index: index)
-        updateFrameVisibleRect()
-        updateMagnification()
+        updateFrameAndScale()
     }
     
     func updateSlideShowLabel(isSlideShowGoing:Bool){
