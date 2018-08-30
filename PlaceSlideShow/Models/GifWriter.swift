@@ -43,7 +43,7 @@ class GifWriter{
     func writeGif(destinationPath:URL, place:Place, scale:Double, backingScale:CGFloat){
         var images:[URL] = []
         for index:Int in start...stop{
-            if (skipFrames == 0 || index % skipFrames == 0) {
+            if (skipFrames == 0 || index % skipFrames == 0  || index == stop) {
                 let imageURL = place.getContentAtIndex(index: index)
                 images.append(imageURL)
             }
