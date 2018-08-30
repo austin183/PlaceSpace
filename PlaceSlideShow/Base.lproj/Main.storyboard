@@ -742,16 +742,16 @@
                                 </connections>
                             </button>
                             <slider toolTip="SlideShow speed" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-ye-LG1">
-                                <rect key="frame" x="149" y="600" width="780" height="24"/>
+                                <rect key="frame" x="149" y="600" width="794" height="24"/>
                                 <sliderCell key="cell" continuous="YES" alignment="left" minValue="-200" maxValue="200" doubleValue="29.999999999999996" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="LOg-8l-hHp"/>
                                 <connections>
                                     <action selector="fpsSliderMoved:" target="XfG-lQ-9wD" id="8zO-g6-NZA"/>
                                 </connections>
                             </slider>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0y-jk-Fyr">
-                                <rect key="frame" x="0.0" y="0.0" width="927" height="576"/>
+                                <rect key="frame" x="0.0" y="0.0" width="941" height="576"/>
                                 <clipView key="contentView" id="vrB-Bz-54z">
-                                    <rect key="frame" x="1" y="1" width="925" height="574"/>
+                                    <rect key="frame" x="1" y="1" width="939" height="574"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="Olg-lX-Cix">
@@ -776,25 +776,36 @@
                                     </constraints>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Sda-fa-nX6">
-                                    <rect key="frame" x="1" y="559" width="925" height="16"/>
+                                    <rect key="frame" x="1" y="559" width="939" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="KNj-Qb-VxM">
-                                    <rect key="frame" x="910" y="1" width="16" height="574"/>
+                                    <rect key="frame" x="924" y="1" width="16" height="574"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63x-Z7-kt5">
-                                <rect key="frame" x="937" y="409" width="77" height="167"/>
+                                <rect key="frame" x="943" y="409" width="75" height="167"/>
                                 <subviews>
-                                    <textField toolTip="Index of current image" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Nd-1J-EC2">
-                                        <rect key="frame" x="-2" y="150" width="81" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="currentIndex" id="RGa-z8-tTX">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vW9-le-1L6">
+                                        <rect key="frame" x="0.0" y="150" width="75" height="17"/>
+                                        <subviews>
+                                            <textField toolTip="Index of current image" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Nd-1J-EC2">
+                                                <rect key="frame" x="-2" y="0.0" width="79" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="currentIndex" id="RGa-z8-tTX">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                     <textField toolTip="Total number of images" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8sN-TF-WLL">
                                         <rect key="frame" x="-2" y="125" width="68" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="totalCount" id="2Xv-hj-8qT">
@@ -844,6 +855,9 @@
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="OcG-VP-hUg"/>
+                                </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -864,7 +878,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BrX-La-gcQ">
-                                <rect key="frame" x="935" y="605" width="28" height="17"/>
+                                <rect key="frame" x="941" y="605" width="28" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FPS" id="gDK-SD-D8x">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -876,7 +890,7 @@
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="top" secondItem="lTA-ye-LG1" secondAttribute="top" id="41m-HH-RIU"/>
                             <constraint firstItem="63x-Z7-kt5" firstAttribute="top" secondItem="o0y-jk-Fyr" secondAttribute="top" id="BK8-po-1FN"/>
                             <constraint firstItem="63x-Z7-kt5" firstAttribute="leading" secondItem="BrX-La-gcQ" secondAttribute="leading" id="EEE-Rz-Yir"/>
-                            <constraint firstAttribute="trailing" secondItem="63x-Z7-kt5" secondAttribute="trailing" constant="5" id="EpV-rf-77C"/>
+                            <constraint firstAttribute="trailing" secondItem="63x-Z7-kt5" secondAttribute="trailing" constant="1" id="EpV-rf-77C"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="GMj-m3-tjp" secondAttribute="bottom" constant="5" id="EuR-0l-D4N"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="trailing" secondItem="lTA-ye-LG1" secondAttribute="trailing" id="KRy-ll-Bi0"/>
                             <constraint firstItem="o0y-jk-Fyr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="53" id="XvL-MG-waw"/>
@@ -888,7 +902,7 @@
                             <constraint firstItem="kcX-8d-pVW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="g0E-cw-ajm"/>
                             <constraint firstItem="lTA-ye-LG1" firstAttribute="leading" secondItem="kcX-8d-pVW" secondAttribute="trailing" constant="8" symbolic="YES" id="mTU-yO-Q8C"/>
                             <constraint firstItem="BrX-La-gcQ" firstAttribute="top" secondItem="lTA-ye-LG1" secondAttribute="top" id="p52-2I-xTT"/>
-                            <constraint firstItem="63x-Z7-kt5" firstAttribute="leading" secondItem="o0y-jk-Fyr" secondAttribute="trailing" constant="10" id="tIv-30-L1C"/>
+                            <constraint firstItem="63x-Z7-kt5" firstAttribute="leading" secondItem="o0y-jk-Fyr" secondAttribute="trailing" constant="2" id="tIv-30-L1C"/>
                         </constraints>
                     </view>
                     <connections>
