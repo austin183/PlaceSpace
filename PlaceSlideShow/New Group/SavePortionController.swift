@@ -16,6 +16,7 @@ class SavePortionController: NSViewController {
     private var mostRecentGif:URL? = nil
     var place:Place?
     var dimensions:Dimensions?
+    let skipFrameFactor:Int = 150
     
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var xValue: NSTextField!
@@ -130,7 +131,7 @@ class SavePortionController: NSViewController {
         stopIndex.integerValue = stop
         if stop - start > 100{
             let distance:Int = stop - start
-            var skip:Int = Int(distance / 100)
+            var skip:Int = Int(distance / skipFrameFactor)
             if skip <= 1{
                 skip = 0
             }

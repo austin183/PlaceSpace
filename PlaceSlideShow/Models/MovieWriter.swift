@@ -43,6 +43,9 @@ class MovieWriter: NSObject {
         }
         var rect = NSMakeRect(0, 0, 1000, 1000)
         var movieImgs:[NSImage] = [NSImage]()
+        let finalScale = scale
+        let scaledSize:NSSize = NSSize(width: CGFloat(width) * CGFloat(finalScale), height: CGFloat(height) * CGFloat(finalScale))
+        let cgScaledSize:CGSize = CGSize(width: CGFloat(width) * CGFloat(finalScale), height: CGFloat(height) * CGFloat(finalScale))
         for img in images {
             // Convert an NSImage to CGImage, fitting within the specified rect
             // You can replace `&rect` with nil
@@ -54,17 +57,11 @@ class MovieWriter: NSObject {
                 finalImage = imageHandler.cropImage(image: cgImage, originX: CGFloat(xValue), originY: CGFloat(yValue), width: CGFloat(width), height: CGFloat(height))
             }
             
-            if(scale != 1.0){
-                var finalScale:Double = scale
-                if(backingScale != 1.0){
-                    finalScale = scale / Double(backingScale)
-                }
-                
-                finalImage = imageHandler.getResizedImage(image: finalImage, scale: finalScale)!
-            }
-            movieImgs.append(NSImage(cgImage: finalImage, size: NSSize(width: CGFloat(width), height: CGFloat(height))))
+            
+            finalImage = imageHandler.getResizedImage(image: finalImage, scale: finalScale)!
+            movieImgs.append(NSImage(cgImage: finalImage, size: scaledSize))
         }
-        writeImagesAsMovie(movieImgs, videoPath: destinationPath.path, videoSize: CGSize(width: CGFloat(width), height: CGFloat(height)), videoFPS: Int32(gifFPS))
+        writeImagesAsMovie(movieImgs, videoPath: destinationPath.path, videoSize: cgScaledSize, videoFPS: Int32(gifFPS))
     }
     
     func writeImagesAsMovie(_ allImages: [NSImage], videoPath: String, videoSize: CGSize, videoFPS: Int32) {
