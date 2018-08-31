@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D90FE12521389B9500F80602 /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90FE12421389B9500F80602 /* ImageHandler.swift */; };
+		D90FE1272138A66200F80602 /* MovieWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90FE1262138A66200F80602 /* MovieWriter.swift */; };
 		D93FFD81212A1E9700BC6CBF /* SavePortionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93FFD80212A1E9700BC6CBF /* SavePortionController.swift */; };
 		D95FB4DA1EAEC85B00B8C551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FB4D91EAEC85B00B8C551 /* AppDelegate.swift */; };
 		D95FB4DC1EAEC85B00B8C551 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FB4DB1EAEC85B00B8C551 /* MainViewController.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D90FE12421389B9500F80602 /* ImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandler.swift; sourceTree = "<group>"; };
+		D90FE1262138A66200F80602 /* MovieWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieWriter.swift; sourceTree = "<group>"; };
 		D93FFD80212A1E9700BC6CBF /* SavePortionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePortionController.swift; sourceTree = "<group>"; };
 		D95FB4D61EAEC85B00B8C551 /* PlaceSlideShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaceSlideShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95FB4D91EAEC85B00B8C551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				D9E288DE21289AC6007C56B3 /* Place.swift */,
 				D9BBEF26212B6A18000E8E7A /* GifWriter.swift */,
 				D99EC727213624E4004BB9A9 /* Dimensions.swift */,
+				D90FE12421389B9500F80602 /* ImageHandler.swift */,
+				D90FE1262138A66200F80602 /* MovieWriter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +314,8 @@
 				D99EC728213624E4004BB9A9 /* Dimensions.swift in Sources */,
 				D95FB4DC1EAEC85B00B8C551 /* MainViewController.swift in Sources */,
 				D95FB4DA1EAEC85B00B8C551 /* AppDelegate.swift in Sources */,
+				D90FE1272138A66200F80602 /* MovieWriter.swift in Sources */,
+				D90FE12521389B9500F80602 /* ImageHandler.swift in Sources */,
 				D9C2A0D021322DDE00EB9FB2 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

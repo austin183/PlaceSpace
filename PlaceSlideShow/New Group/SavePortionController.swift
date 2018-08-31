@@ -11,6 +11,8 @@ import Cocoa
 
 class SavePortionController: NSViewController {
     private var gifWriter:GifWriter = GifWriter()
+    private var movieWriter:MovieWriter = MovieWriter()
+    private var imageHandler:ImageHandler = ImageHandler()
     private var mostRecentGif:URL? = nil
     var place:Place?
     var dimensions:Dimensions?
@@ -33,11 +35,11 @@ class SavePortionController: NSViewController {
         place = appDelegate.getPlace()
         dimensions = appDelegate.getDimensions()
         if(dimensions != nil){
-            yValue.integerValue = (dimensions?.originY)!
-            xValue.integerValue = (dimensions?.originX)!
-            width.integerValue = (dimensions?.width)!
-            height.integerValue = (dimensions?.height)!
-            scale.doubleValue = (dimensions!.scale as! NSString).doubleValue
+            yValue.integerValue = (dimensions!.originY)
+            xValue.integerValue = (dimensions!.originX)
+            width.integerValue = (dimensions!.width)
+            height.integerValue = (dimensions!.height)
+            scale.doubleValue = (dimensions!.scale as NSString).doubleValue
         }
         else{
             startIndex.integerValue = 0
@@ -97,10 +99,6 @@ class SavePortionController: NSViewController {
         let y:Int = getNonNegativeValue(value: xValue.integerValue)
         var wd:Int = getNonNegativeValue(value: width.integerValue)
         var ht:Int = getNonNegativeValue(value: height.integerValue)
-        yValue.textColor = NSColor.black
-        xValue.textColor = NSColor.black
-        width.textColor = NSColor.black
-        height.textColor = NSColor.black
         
         if(x == 0 && y == 0 && wd == 0 && ht == 0){
             return true//the GifWriter will not try to crop this dataset
@@ -151,17 +149,28 @@ class SavePortionController: NSViewController {
         panel.title = "Save GIF"
         panel.message = "Please save the GIF somewhere"
         panel.nameFieldLabel = "Name to give GIF file"
-        panel.allowedFileTypes = ["gif"]
+        panel.allowedFileTypes = ["mp4"]
         panel.nameFieldStringValue = "PlaceSnippet"
+        panel.canCreateDirectories = true
+        /*
         gifWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:gifFps.integerValue)
         if(validateCropRectangleCoordinates()){
             gifWriter.setCropRectangleCoordinates(yValue: yValue.integerValue, xValue: xValue.integerValue, width: width.integerValue, height: height.integerValue)
         }
-        
+ */
+        movieWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:gifFps.integerValue)
+        if(validateCropRectangleCoordinates()){
+            movieWriter.setCropRectangleCoordinates(yValue: yValue.integerValue, xValue: xValue.integerValue, width: width.integerValue, height: height.integerValue)
+        }
         panel.beginSheetModal(for: self.view.window!, completionHandler: { num in
             if num == NSApplication.ModalResponse.OK {
                 let backingScale = self.view.window?.backingScaleFactor
+                
+                self.movieWriter.writeMovie(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
+                
+                /*
                 self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
+                */
                 self.mostRecentGif = panel.url!
                 self.openLastGif.isHidden = false
             } else {
