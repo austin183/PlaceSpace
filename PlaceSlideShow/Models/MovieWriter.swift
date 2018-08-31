@@ -117,8 +117,6 @@ class MovieWriter: NSObject {
                 assetWriter.finishWriting {
                     if (assetWriter.error != nil) {
                         print("Error converting images to video: \(String(describing: assetWriter.error))")
-                    } else {
-                        print("Converted images to movie @ \(videoPath)")
                     }
                 }
             }
@@ -147,10 +145,10 @@ class MovieWriter: NSObject {
             newWriter.add(assetWriterVideoInput)
             
             // Return writer
-            print("Created asset writer for \(size.width)x\(size.height) video")
+            //print("Created asset writer for \(size.width)x\(size.height) video")
             return newWriter
         } catch {
-            print("Error creating asset writer: \(error)")
+            NSLog("Error: Failed to allocate pixel buffer from pool")
             return nil
         }
     }
