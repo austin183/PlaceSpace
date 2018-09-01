@@ -17,7 +17,6 @@
 		D95FB4EC1EAEC85B00B8C551 /* PlaceSlideShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FB4EB1EAEC85B00B8C551 /* PlaceSlideShowTests.swift */; };
 		D95FB4F71EAEC85B00B8C551 /* PlaceSlideShowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FB4F61EAEC85B00B8C551 /* PlaceSlideShowUITests.swift */; };
 		D99EC728213624E4004BB9A9 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99EC727213624E4004BB9A9 /* Dimensions.swift */; };
-		D9BBEF27212B6A18000E8E7A /* GifWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BBEF26212B6A18000E8E7A /* GifWriter.swift */; };
 		D9C2A0D021322DDE00EB9FB2 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */; };
 		D9E288DF21289AC6007C56B3 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E288DE21289AC6007C56B3 /* Place.swift */; };
 		D9EACCC92135F593000C6DBE /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EACCC82135F593000C6DBE /* MainWindowController.swift */; };
@@ -57,7 +56,6 @@
 		D95FB4F61EAEC85B00B8C551 /* PlaceSlideShowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSlideShowUITests.swift; sourceTree = "<group>"; };
 		D95FB4F81EAEC85B00B8C551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D99EC727213624E4004BB9A9 /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
-		D9BBEF26212B6A18000E8E7A /* GifWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifWriter.swift; sourceTree = "<group>"; };
 		D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		D9E288DE21289AC6007C56B3 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		D9E288E02128D30F007C56B3 /* PlaceSlideShow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaceSlideShow.entitlements; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				D9E288DE21289AC6007C56B3 /* Place.swift */,
-				D9BBEF26212B6A18000E8E7A /* GifWriter.swift */,
 				D99EC727213624E4004BB9A9 /* Dimensions.swift */,
 				D90FE12421389B9500F80602 /* ImageHandler.swift */,
 				D90FE1262138A66200F80602 /* MovieWriter.swift */,
@@ -308,7 +305,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9EACCC92135F593000C6DBE /* MainWindowController.swift in Sources */,
-				D9BBEF27212B6A18000E8E7A /* GifWriter.swift in Sources */,
 				D93FFD81212A1E9700BC6CBF /* SavePortionController.swift in Sources */,
 				D9E288DF21289AC6007C56B3 /* Place.swift in Sources */,
 				D99EC728213624E4004BB9A9 /* Dimensions.swift in Sources */,

@@ -205,7 +205,7 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="SavePortionAsGif…" keyEquivalent="s" id="pxx-59-PXV">
+                                        <menuItem title="Save Portion As MP4…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
                                                 <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
                                                 <segue destination="YXg-Ut-WtY" kind="show" id="qx1-b8-ees"/>
@@ -392,7 +392,7 @@
         <scene sceneID="tgu-or-5hx">
             <objects>
                 <windowController id="YXg-Ut-WtY" sceneMemberID="viewController">
-                    <window key="window" title="Save Portion as GIF" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="lhY-CR-EJH">
+                    <window key="window" title="Save Portion as MP4" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="lhY-CR-EJH">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -458,8 +458,8 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Elj-GK-fDm">
-                                <rect key="frame" x="276" y="13" width="91" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save Gif" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OFj-xZ-ws0">
+                                <rect key="frame" x="266" y="13" width="101" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save MP4" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OFj-xZ-ws0">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -487,15 +487,15 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vKN-Uj-oEj">
-                                <rect key="frame" x="260" y="148" width="46" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GifFPS" id="NJx-xq-gQj">
+                                <rect key="frame" x="260" y="148" width="28" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FPS" id="NJx-xq-gQj">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField toolTip="Frames per Second for Generated GIF" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-ay-iHf">
-                                <rect key="frame" x="305" y="146" width="56" height="22"/>
+                                <rect key="frame" x="287" y="146" width="74" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wIS-Kg-zaY">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="w6U-Ag-zVC"/>
                                     <font key="font" metaFont="system"/>
@@ -603,8 +603,8 @@
                                 </textFieldCell>
                             </textField>
                             <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="77y-cb-jhz">
-                                <rect key="frame" x="14" y="13" width="165" height="32"/>
-                                <buttonCell key="cell" type="push" title="Open Last Gif Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CgV-PD-Ixv">
+                                <rect key="frame" x="14" y="13" width="188" height="32"/>
+                                <buttonCell key="cell" type="push" title="Open Last Export Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CgV-PD-Ixv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -678,9 +678,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gifFps" destination="cCX-ay-iHf" id="2HT-Ye-OxN"/>
+                        <outlet property="exportFPS" destination="cCX-ay-iHf" id="2HT-Ye-OxN"/>
                         <outlet property="height" destination="8eQ-iy-4sz" id="MOW-YJ-E8z"/>
-                        <outlet property="openLastGif" destination="77y-cb-jhz" id="6pJ-nB-K6e"/>
+                        <outlet property="openLastExport" destination="77y-cb-jhz" id="6pJ-nB-K6e"/>
                         <outlet property="scale" destination="yEm-IJ-iCY" id="oHp-pE-yD2"/>
                         <outlet property="skipFrames" destination="9rG-1Q-yeA" id="NDf-Cp-ykU"/>
                         <outlet property="startIndex" destination="4P2-K9-jj5" id="aoV-TZ-2ad"/>

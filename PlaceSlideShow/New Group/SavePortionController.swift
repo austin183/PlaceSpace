@@ -10,13 +10,12 @@ import Cocoa
 
 
 class SavePortionController: NSViewController {
-    private var gifWriter:GifWriter = GifWriter()
     private var movieWriter:MovieWriter = MovieWriter()
     private var imageHandler:ImageHandler = ImageHandler()
-    private var mostRecentGif:URL? = nil
+    private var mostRecentExport:URL? = nil
     var place:Place?
     var dimensions:Dimensions?
-    let skipFrameFactor:Int = 150
+    let skipFrameFactor:Int = 200
     
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var xValue: NSTextField!
@@ -26,9 +25,9 @@ class SavePortionController: NSViewController {
     @IBOutlet weak var stopIndex: NSTextField!
     @IBOutlet weak var startIndex: NSTextField!
     @IBOutlet weak var skipFrames: NSTextField!
-    @IBOutlet weak var gifFps: NSTextField!
+    @IBOutlet weak var exportFPS: NSTextField!
     
-    @IBOutlet weak var openLastGif: NSButton!
+    @IBOutlet weak var openLastExport: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +44,7 @@ class SavePortionController: NSViewController {
         else{
             startIndex.integerValue = 0
             stopIndex.integerValue = place!.getContentsCount()
-            gifFps.integerValue = 16
+            exportFPS.integerValue = 30
             yValue.integerValue = 0
             xValue.integerValue = 0
             width.integerValue = 0
@@ -54,16 +53,16 @@ class SavePortionController: NSViewController {
         }
         startIndex.integerValue = 0
         stopIndex.integerValue = place!.getContentsCount()
-        gifFps.integerValue = 16
+        exportFPS.integerValue = 16
         validateRange()
     }
     
     @IBAction func openLastGifClicked(_ sender: NSButton) {
         let fileManager = FileManager.default
-        if(mostRecentGif == nil) { return }
-        if fileManager.fileExists(atPath: mostRecentGif!.path) {
+        if(mostRecentExport == nil) { return }
+        if fileManager.fileExists(atPath: mostRecentExport!.path) {
             
-            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: mostRecentGif!.deletingLastPathComponent().path)
+            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: mostRecentExport!.deletingLastPathComponent().path)
         } else {
             return
         }
@@ -129,7 +128,7 @@ class SavePortionController: NSViewController {
         }
         startIndex.integerValue = start
         stopIndex.integerValue = stop
-        if stop - start > 100{
+        if stop - start > skipFrameFactor{
             let distance:Int = stop - start
             var skip:Int = Int(distance / skipFrameFactor)
             if skip <= 1{
@@ -137,8 +136,8 @@ class SavePortionController: NSViewController {
             }
             skipFrames.integerValue = skip
         }
-        if gifFps.integerValue <= 0{
-            gifFps.integerValue = 1
+        if exportFPS.integerValue <= 0{
+            exportFPS.integerValue = 1
         }
     }
     
@@ -147,19 +146,14 @@ class SavePortionController: NSViewController {
         let launcherLogPathWithTilde = "~/Pictures" as NSString
         let expandedLauncherLogPath = launcherLogPathWithTilde.expandingTildeInPath
         panel.directoryURL = NSURL.fileURL(withPath: expandedLauncherLogPath, isDirectory: true)
-        panel.title = "Save GIF"
-        panel.message = "Please save the GIF somewhere"
-        panel.nameFieldLabel = "Name to give GIF file"
+        panel.title = "Save MP4"
+        panel.message = "Please save the MP4 somewhere"
+        panel.nameFieldLabel = "Name to give MP4 file"
         panel.allowedFileTypes = ["mp4"]
         panel.nameFieldStringValue = "PlaceSnippet"
         panel.canCreateDirectories = true
-        /*
-        gifWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:gifFps.integerValue)
-        if(validateCropRectangleCoordinates()){
-            gifWriter.setCropRectangleCoordinates(yValue: yValue.integerValue, xValue: xValue.integerValue, width: width.integerValue, height: height.integerValue)
-        }
- */
-        movieWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:gifFps.integerValue)
+
+        movieWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:exportFPS.integerValue)
         if(validateCropRectangleCoordinates()){
             movieWriter.setCropRectangleCoordinates(yValue: yValue.integerValue, xValue: xValue.integerValue, width: width.integerValue, height: height.integerValue)
         }
@@ -169,11 +163,8 @@ class SavePortionController: NSViewController {
                 
                 self.movieWriter.writeMovie(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
                 
-                /*
-                self.gifWriter.writeGif(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
-                */
-                self.mostRecentGif = panel.url!
-                self.openLastGif.isHidden = false
+                self.mostRecentExport = panel.url!
+                self.openLastExport.isHidden = false
             } else {
                 print("nothing chosen")
             }
