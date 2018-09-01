@@ -3,7 +3,11 @@
 import AppKit
 import AVFoundation
 
+protocol MovieWriterProtocol{
+    func currentProgress(_ section:String, current:Int, total:Int)
+}
 class MovieWriter: NSObject {
+    var delegate:MovieWriterProtocol?
     private var imageHandler:ImageHandler = ImageHandler()
     private var start:Int = 0
     private var stop:Int = 0
@@ -34,6 +38,8 @@ class MovieWriter: NSObject {
     
     func writeMovie(destinationPath:URL, place:Place, scale:Double, backingScale:CGFloat){
         //do everything to build the things to pass to writeImagesAsMovie
+        let section:String = "Building images in memory"
+        
         var images:[URL] = []
         for index:Int in start...stop{
             if (skipFrames == 0 || index % skipFrames == 0  || index == stop) {
@@ -41,12 +47,16 @@ class MovieWriter: NSObject {
                 images.append(imageURL)
             }
         }
+        let imageCount = images.count
+        delegate?.currentProgress(section, current: 0, total: imageCount)
         var rect = NSMakeRect(0, 0, 1000, 1000)
         var movieImgs:[NSImage] = [NSImage]()
         let finalScale = scale
         let scaledSize:NSSize = NSSize(width: CGFloat(width) * CGFloat(finalScale), height: CGFloat(height) * CGFloat(finalScale))
         let cgScaledSize:CGSize = CGSize(width: CGFloat(width) * CGFloat(finalScale), height: CGFloat(height) * CGFloat(finalScale))
+        var counter:Int = 0
         for img in images {
+            counter += 1
             // Convert an NSImage to CGImage, fitting within the specified rect
             // You can replace `&rect` with nil
             let image = NSImage(contentsOf: img)
@@ -60,14 +70,19 @@ class MovieWriter: NSObject {
             
             finalImage = imageHandler.getResizedImage(image: finalImage, scale: finalScale)!
             movieImgs.append(NSImage(cgImage: finalImage, size: scaledSize))
+            delegate?.currentProgress(section, current: counter, total: imageCount)
         }
         writeImagesAsMovie(movieImgs, videoPath: destinationPath.path, videoSize: cgScaledSize, videoFPS: Int32(exportFPS))
     }
     
     func writeImagesAsMovie(_ allImages: [NSImage], videoPath: String, videoSize: CGSize, videoFPS: Int32) {
         // Create AVAssetWriter to write video
+        let imageCount = allImages.count
+        let section:String = "Building the movie file"
+        delegate?.currentProgress(section, current: 0, total: imageCount)
         guard let assetWriter = createAssetWriter(videoPath, size: videoSize) else {
             print("Error converting images to video: AVAssetWriter not created")
+            delegate?.currentProgress("error converting images to video", current: 0, total: 0)
             return
         }
         
@@ -85,6 +100,7 @@ class MovieWriter: NSObject {
         assetWriter.startSession(atSourceTime: kCMTimeZero)
         if (pixelBufferAdaptor.pixelBufferPool == nil) {
             print("Error converting images to video: pixelBufferPool nil after starting session")
+            delegate?.currentProgress("error converting images to video", current: 0, total: 0)
             return
         }
         
@@ -104,11 +120,13 @@ class MovieWriter: NSObject {
                 let presentationTime = frameCount == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, frameDuration)
                 
                 if !self.appendPixelBufferForImageAtURL(allImages[frameCount], pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                    self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
                     print("Error converting images to video: AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
                     return
                 }
                 
                 frameCount += 1
+                self.delegate?.currentProgress(section, current: frameCount, total: imageCount)
             }
             
             // No more images to add? End video.
@@ -116,6 +134,7 @@ class MovieWriter: NSObject {
                 writerInput.markAsFinished()
                 assetWriter.finishWriting {
                     if (assetWriter.error != nil) {
+                        self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
                         print("Error converting images to video: \(String(describing: assetWriter.error))")
                     }
                 }
@@ -148,6 +167,7 @@ class MovieWriter: NSObject {
             //print("Created asset writer for \(size.width)x\(size.height) video")
             return newWriter
         } catch {
+            delegate?.currentProgress("error converting images to video", current: 0, total: 0)
             NSLog("Error: Failed to allocate pixel buffer from pool")
             return nil
         }
@@ -171,6 +191,7 @@ class MovieWriter: NSObject {
                     appendSucceeded = pixelBufferAdaptor.append(pixelBuffer, withPresentationTime: presentationTime)
                     pixelBufferPointer.deinitialize(count:1)
                 } else {
+                    delegate?.currentProgress("error converting images to video", current: 0, total: 0)
                     NSLog("Error: Failed to allocate pixel buffer from pool")
                 }
                 

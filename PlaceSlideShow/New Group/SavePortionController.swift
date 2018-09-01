@@ -17,6 +17,8 @@ class SavePortionController: NSViewController {
     var dimensions:Dimensions?
     let skipFrameFactor:Int = 200
     
+    @IBOutlet weak var progressUpdate: NSTextField!
+    
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var xValue: NSTextField!
     @IBOutlet weak var yValue: NSTextField!
@@ -32,6 +34,7 @@ class SavePortionController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
+        movieWriter.delegate = self
         place = appDelegate.getPlace()
         dimensions = appDelegate.getDimensions()
         if(dimensions != nil){
@@ -160,7 +163,7 @@ class SavePortionController: NSViewController {
         panel.beginSheetModal(for: self.view.window!, completionHandler: { num in
             if num == NSApplication.ModalResponse.OK {
                 let backingScale = self.view.window?.backingScaleFactor
-                
+                panel.endSheet(self.view.window!)
                 self.movieWriter.writeMovie(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
                 
                 self.mostRecentExport = panel.url!
@@ -171,5 +174,22 @@ class SavePortionController: NSViewController {
         })
         
         
+    }
+    
+    fileprivate func updateExportProgress(section:String, current:Int, total:Int){
+        var hideProgress = true
+        if(current < total){
+            hideProgress = false
+        }
+
+        DispatchQueue.main.async{
+            self.progressUpdate.stringValue = "\(section) - \(current) of \(total)"
+            self.progressUpdate.isHidden = hideProgress
+        }
+    }
+}
+extension SavePortionController:MovieWriterProtocol{
+    func currentProgress(_ section:String, current:Int, total:Int){
+        updateExportProgress(section:section, current:current, total:total)
     }
 }
