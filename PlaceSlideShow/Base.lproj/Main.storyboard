@@ -442,7 +442,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="startIndexChanged:" target="H3K-Al-zY2" id="x8v-Yj-M07"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="x8v-Yj-M07"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZqU-eq-kvn">
@@ -454,7 +454,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="stopIndexChanged:" target="H3K-Al-zY2" id="diz-BM-wxu"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="diz-BM-wxu"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Elj-GK-fDm">
@@ -462,10 +462,10 @@
                                 <buttonCell key="cell" type="push" title="Save MP4" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OFj-xZ-ws0">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="saveButtonClicked:" target="H3K-Al-zY2" id="5et-jn-5V5"/>
+                                    </connections>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="saveButtonClicked:" target="H3K-Al-zY2" id="72E-dy-qCe"/>
-                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pqc-gy-yBu">
                                 <rect key="frame" x="258" y="187" width="79" height="17"/>
@@ -494,7 +494,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField toolTip="Frames per Second for Generated GIF" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-ay-iHf">
+                            <textField toolTip="Frames per Second for Generated MP4" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCX-ay-iHf">
                                 <rect key="frame" x="287" y="146" width="74" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wIS-Kg-zaY">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="w6U-Ag-zVC"/>
@@ -503,7 +503,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="gifFpsChanged:" target="H3K-Al-zY2" id="0Yx-nH-PAH"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="0Yx-nH-PAH"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UFK-C7-Ydn">
@@ -526,7 +526,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="topLeftYChanged:" target="H3K-Al-zY2" id="RPM-nV-O0s"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="RPM-nV-O0s"/>
                                 </connections>
                             </textField>
                             <textField toolTip="Pixels to go Right" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bM6-lM-cxS">
@@ -538,7 +538,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="bottomRightXChanged:" target="H3K-Al-zY2" id="kBh-7n-Fpe"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="kBh-7n-Fpe"/>
                                 </connections>
                             </textField>
                             <textField toolTip="Pixels to go Down" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8eQ-iy-4sz">
@@ -550,7 +550,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="bottomRightYChanged:" target="H3K-Al-zY2" id="akD-cF-H3L"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="akD-cF-H3L"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Tr-IE-Ob3">
@@ -609,7 +609,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="openLastGifClicked:" target="H3K-Al-zY2" id="IVx-bg-woG"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="IVx-bg-woG"/>
                                 </connections>
                             </button>
                             <textField toolTip="Pixels to start going Right" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B6a-re-Leo">
@@ -621,7 +621,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="topLeftXChanged:" target="H3K-Al-zY2" id="Bli-b9-lhW"/>
+                                    <action selector="openLastExportClicked:" target="H3K-Al-zY2" id="Bli-b9-lhW"/>
                                 </connections>
                             </textField>
                         </subviews>

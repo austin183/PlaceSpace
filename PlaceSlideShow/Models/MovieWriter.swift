@@ -8,18 +8,18 @@ class MovieWriter: NSObject {
     private var start:Int = 0
     private var stop:Int = 0
     private var skipFrames:Int = 0
-    private var gifFPS:Int = 0
+    private var exportFPS:Int = 0
     private var xValue:Int = 0
     private var yValue:Int = 0
     private var width:Int = 0
     private var height:Int = 0
     private var useCrop:Bool = false
     
-    func setRange(start:Int, stop:Int, skipFrames:Int, gifFPS:Int){
+    func setRange(start:Int, stop:Int, skipFrames:Int, exportFPS:Int){
         self.start = start
         self.stop = stop
         self.skipFrames = skipFrames
-        self.gifFPS = gifFPS
+        self.exportFPS = exportFPS
     }
     
     func setCropRectangleCoordinates(yValue:Int, xValue:Int, width:Int, height:Int){
@@ -61,7 +61,7 @@ class MovieWriter: NSObject {
             finalImage = imageHandler.getResizedImage(image: finalImage, scale: finalScale)!
             movieImgs.append(NSImage(cgImage: finalImage, size: scaledSize))
         }
-        writeImagesAsMovie(movieImgs, videoPath: destinationPath.path, videoSize: cgScaledSize, videoFPS: Int32(gifFPS))
+        writeImagesAsMovie(movieImgs, videoPath: destinationPath.path, videoSize: cgScaledSize, videoFPS: Int32(exportFPS))
     }
     
     func writeImagesAsMovie(_ allImages: [NSImage], videoPath: String, videoSize: CGSize, videoFPS: Int32) {

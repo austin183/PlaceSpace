@@ -57,7 +57,7 @@ class SavePortionController: NSViewController {
         validateRange()
     }
     
-    @IBAction func openLastGifClicked(_ sender: NSButton) {
+    @IBAction func openLastExportClicked(_ sender: NSButton) {
         let fileManager = FileManager.default
         if(mostRecentExport == nil) { return }
         if fileManager.fileExists(atPath: mostRecentExport!.path) {
@@ -90,7 +90,7 @@ class SavePortionController: NSViewController {
         validateRange()
     }
     
-    @IBAction func gifFpsChanged(_ sender: NSTextField) {
+    @IBAction func exportFpsChanged(_ sender: NSTextField) {
         validateRange()
     }
     
@@ -101,7 +101,7 @@ class SavePortionController: NSViewController {
         var ht:Int = getNonNegativeValue(value: height.integerValue)
         
         if(x == 0 && y == 0 && wd == 0 && ht == 0){
-            return true//the GifWriter will not try to crop this dataset
+            return true//the MovieWriter will not try to crop this dataset
         }
         if(wd + x > 1000){
             wd = 1000 - x
@@ -153,7 +153,7 @@ class SavePortionController: NSViewController {
         panel.nameFieldStringValue = "PlaceSnippet"
         panel.canCreateDirectories = true
 
-        movieWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, gifFPS:exportFPS.integerValue)
+        movieWriter.setRange(start: startIndex.integerValue, stop: stopIndex.integerValue, skipFrames:skipFrames.integerValue, exportFPS:exportFPS.integerValue)
         if(validateCropRectangleCoordinates()){
             movieWriter.setCropRectangleCoordinates(yValue: yValue.integerValue, xValue: xValue.integerValue, width: width.integerValue, height: height.integerValue)
         }
