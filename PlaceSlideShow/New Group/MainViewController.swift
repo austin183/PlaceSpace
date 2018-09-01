@@ -167,26 +167,7 @@ class MainViewController: NSViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let defaults = UserDefaults.standard
-        let defaultFPS = defaults.integer(forKey: "startingFPS")
-        let defaultImageIndex = defaults.integer(forKey: "startingIndex")
-
-        setPlaceDirectory(defaults: defaults)
-        let appDelegate = NSApp.delegate as! AppDelegate
-        appDelegate.setPlace(placeToSet:place)
-        appDelegate.setDimensions(dimensionsToSet: dimensions)
-        if(defaultFPS > 0){
-            slideShowFPS.integerValue = defaultFPS
-        }
-        if(defaultImageIndex > 0){
-            place.setContentsIndex(index: defaultImageIndex)
-            imageSlider.integerValue = defaultImageIndex
-        }
-        place.delegate = self
-        updateUI(index: place.getContentsIndex())
-        
+    fileprivate func addObservers() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateFrameVisibleRect),
@@ -207,13 +188,30 @@ class MainViewController: NSViewController {
             name: NSScrollView.didEndLiveMagnifyNotification,
             object: placeScrollView
         )
-        fps.integerValue = fpsSlider.integerValue
-        setScaleDisplayValue(scale: placeScrollView.magnification)
     }
     
-    @objc func updateMagnification(){
-        setScaleDisplayValue(scale: placeScrollView.magnification)
-        updateFrameVisibleRect()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let defaults = UserDefaults.standard
+        let defaultFPS = defaults.integer(forKey: "startingFPS")
+        let defaultImageIndex = defaults.integer(forKey: "startingIndex")
+
+        setPlaceDirectory(defaults: defaults)
+        let appDelegate = NSApp.delegate as! AppDelegate
+        appDelegate.setPlace(placeToSet:place)
+        appDelegate.setDimensions(dimensionsToSet: dimensions)
+        if(defaultFPS > 0){
+            slideShowFPS.integerValue = defaultFPS
+        }
+        if(defaultImageIndex > 0){
+            place.setContentsIndex(index: defaultImageIndex)
+            imageSlider.integerValue = defaultImageIndex
+        }
+        place.delegate = self
+        
+        addObservers()
+        fps.integerValue = fpsSlider.integerValue
+        updateUI(index: place.getContentsIndex())
     }
     
     override func viewDidAppear() {
@@ -244,7 +242,7 @@ class MainViewController: NSViewController {
     }
     
     @objc func updateFrameAndScale(){
-        updateMagnification()
+        setScaleDisplayValue(scale: placeScrollView.magnification)
         updateDimensions()
     }
 
@@ -259,7 +257,7 @@ class MainViewController: NSViewController {
         originY.integerValue = Int(y)
         width.integerValue = Int(vr.width)
         height.integerValue = Int(vr.height)
-        updateDimensions()
+        updateFrameAndScale()
     }
     
     @objc func updateUI(index:Int){
