@@ -38,7 +38,6 @@ class MovieWriter: NSObject {
     
     func writeMovie(destinationPath:URL, place:Place, scale:Double, backingScale:CGFloat){
         //do everything to build the things to pass to writeImagesAsMovie
-        let section:String = "Building images in memory"
         
         var images:[URL] = []
         for index:Int in start...stop{
@@ -103,20 +102,18 @@ class MovieWriter: NSObject {
                 // You can replace `&rect` with nil
                 let image = NSImage(contentsOf: allImages[frameCount])
                 
-                let cgImage = image!.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
-                var finalImage:CGImage = cgImage
+                var cgImage = image!.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
+                
                 if(self.useCrop){
-                    finalImage = self.imageHandler.cropImage(image: cgImage, originX: CGFloat(self.xValue), originY: CGFloat(self.yValue), width: CGFloat(self.width), height: CGFloat(self.height))
+                    cgImage = self.imageHandler.cropImage(image: cgImage, originX: CGFloat(self.xValue), originY: CGFloat(self.yValue), width: CGFloat(self.width), height: CGFloat(self.height))
                 }
-                
-                finalImage = self.imageHandler.getResizedImage(image: finalImage, scale: finalScale)!
-                
-                if !self.appendPixelBufferForImageAtURL(NSImage(cgImage: finalImage, size: scaledSize), pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                cgImage = self.imageHandler.getResizedImage(image: cgImage, scale: finalScale)!
+                let imageToWrite = NSImage(cgImage: cgImage, size: scaledSize)
+                if !self.appendPixelBufferForImageAtURL(imageToWrite, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
                     self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
                     print("Error converting images to video: AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
                     return
                 }
-                
                 frameCount += 1
                 self.delegate?.currentProgress(section, current: frameCount, total: imageCount)
             }
@@ -216,7 +213,7 @@ class MovieWriter: NSObject {
         let drawCGRect = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
         var drawRect = NSRectFromCGRect(drawCGRect);
         let cgImage = image.cgImage(forProposedRect: &drawRect, context: nil, hints: nil)!
-        context.draw(cgImage, in: CGRect(x: 0.0,y: 0.0,width: image.size.width,height: image.size.height))
+        context.draw(cgImage, in: drawCGRect)
         
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
     }
