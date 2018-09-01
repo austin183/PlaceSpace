@@ -102,13 +102,14 @@ class MovieWriter: NSObject {
                 // You can replace `&rect` with nil
                 let image = NSImage(contentsOf: allImages[frameCount])
                 
-                var cgImage = image!.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
+                var cgImage:CGImage? = image!.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
                 
                 if(self.useCrop){
-                    cgImage = self.imageHandler.cropImage(image: cgImage, originX: CGFloat(self.xValue), originY: CGFloat(self.yValue), width: CGFloat(self.width), height: CGFloat(self.height))
+                    cgImage = self.imageHandler.cropImage(image: cgImage!, originX: CGFloat(self.xValue), originY: CGFloat(self.yValue), width: CGFloat(self.width), height: CGFloat(self.height))
                 }
-                cgImage = self.imageHandler.getResizedImage(image: cgImage, scale: finalScale)!
-                let imageToWrite = NSImage(cgImage: cgImage, size: scaledSize)
+                
+                let imageToWrite = NSImage(cgImage: cgImage!, size: scaledSize)
+                cgImage = nil
                 if !self.appendPixelBufferForImageAtURL(imageToWrite, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
                     self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
                     print("Error converting images to video: AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
