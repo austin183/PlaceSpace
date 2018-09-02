@@ -13,6 +13,7 @@ class SavePortionController: NSViewController {
     private var movieWriter:MovieWriter = MovieWriter()
     private var imageHandler:ImageHandler = ImageHandler()
     private var mostRecentExport:URL? = nil
+    private var skipFramesChanged:Bool = false
     var place:Place?
     var dimensions:Dimensions?
     let skipFrameFactor:Int = 200
@@ -29,7 +30,7 @@ class SavePortionController: NSViewController {
     @IBOutlet weak var startIndex: NSTextField!
     @IBOutlet weak var skipFrames: NSTextField!
     @IBOutlet weak var exportFPS: NSTextField!
-    
+    @IBOutlet weak var warning: NSTextField!
     @IBOutlet weak var openLastExport: NSButton!
     
     override func viewDidLoad() {
@@ -58,6 +59,7 @@ class SavePortionController: NSViewController {
         startIndex.integerValue = 0
         stopIndex.integerValue = place!.getContentsCount()
         exportFPS.integerValue = 16
+        skipFrames.integerValue = 0
         validateRange()
     }
     
@@ -65,7 +67,6 @@ class SavePortionController: NSViewController {
         let fileManager = FileManager.default
         if(mostRecentExport == nil) { return }
         if fileManager.fileExists(atPath: mostRecentExport!.path) {
-            
             NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: mostRecentExport!.deletingLastPathComponent().path)
         } else {
             return
@@ -98,6 +99,10 @@ class SavePortionController: NSViewController {
         validateRange()
     }
     
+    @IBAction func skipFramesChanged(_ sender: NSTextField) {
+        skipFramesChanged = true
+        validateRange()
+    }
     private func validateCropRectangleCoordinates() -> Bool{
         let x:Int = getNonNegativeValue(value: yValue.integerValue)
         let y:Int = getNonNegativeValue(value: xValue.integerValue)
@@ -124,21 +129,27 @@ class SavePortionController: NSViewController {
     }
     
     private func validateRange(){
+        warning.isHidden = true
         var stop:Int = stopIndex.integerValue
         var start:Int = startIndex.integerValue
-        skipFrames.integerValue = 0
         if stop - start < 0 {
             swap(&start, &stop)
         }
         startIndex.integerValue = start
         stopIndex.integerValue = stop
-        if stop - start > skipFrameFactor{
+        if stop - start > skipFrameFactor {
             let distance:Int = stop - start
             var skip:Int = Int(distance / skipFrameFactor)
-            if skip <= 1{
-                skip = 0
+            if !skipFramesChanged{
+                if skip <= 1{
+                    skip = 0
+                }
+                skipFrames.integerValue = skip
             }
-            skipFrames.integerValue = skip
+            else if skipFrames.integerValue < skip{
+                warning.isHidden = false
+                warning.stringValue = "The number of frames expected from this process is \(Int(distance / skipFrames.integerValue) + 1), which could take up significant memory and resources.  Please consider setting skip frames higher than \(skip)"
+            }
         }
         if exportFPS.integerValue <= 0{
             exportFPS.integerValue = 1
