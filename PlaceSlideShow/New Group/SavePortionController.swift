@@ -19,6 +19,7 @@ class SavePortionController: NSViewController {
     
     @IBOutlet weak var progressUpdate: NSTextField!
     
+    @IBOutlet weak var saveButton: NSButton!
     @IBOutlet weak var scale: NSTextField!
     @IBOutlet weak var xValue: NSTextField!
     @IBOutlet weak var yValue: NSTextField!
@@ -167,7 +168,6 @@ class SavePortionController: NSViewController {
                 self.movieWriter.writeMovie(destinationPath: panel.url!, place: self.place!, scale:self.scale.doubleValue, backingScale:backingScale!)
                 
                 self.mostRecentExport = panel.url!
-                self.openLastExport.isHidden = false
             } else {
                 print("nothing chosen")
             }
@@ -177,14 +177,18 @@ class SavePortionController: NSViewController {
     }
     
     fileprivate func updateExportProgress(section:String, current:Int, total:Int){
-        var hideProgress = true
+        var done = true
         if(current < total){
-            hideProgress = false
+            done = false
         }
 
         DispatchQueue.main.async{
             self.progressUpdate.stringValue = "\(section) - \(current) of \(total)"
-            self.progressUpdate.isHidden = hideProgress
+            self.progressUpdate.isHidden = done
+            self.saveButton.isEnabled = done
+            if(self.openLastExport.isHidden){
+                self.openLastExport.isHidden = !done
+            }
         }
     }
 }

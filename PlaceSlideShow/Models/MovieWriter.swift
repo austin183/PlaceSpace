@@ -140,6 +140,10 @@ class MovieWriter: NSObject {
         // Return new asset writer or nil
         do {
             // Create asset writer
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: pathURL.path){
+                try fileManager.removeItem(at: pathURL)
+            }
             let newWriter = try AVAssetWriter(outputURL: pathURL, fileType: AVFileType.mp4)
             
             // Define settings for video input
