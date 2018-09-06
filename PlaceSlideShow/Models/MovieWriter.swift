@@ -219,8 +219,7 @@ class MovieWriter: NSObject {
         
         // Draw image into context
         let drawCGRect = CGRect(x:0, y:0, width:image.size.width, height:image.size.height)
-        var drawRect = NSRectFromCGRect(drawCGRect);
-        let cgImage = image.cgImage(forProposedRect: &drawRect, context: nil, hints: nil)!
+        let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
         context.draw(cgImage, in: drawCGRect)
         
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
