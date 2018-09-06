@@ -62,7 +62,7 @@ class MainViewController: NSViewController {
     
     @IBAction func zoomToFitMenuItemSelected(_ sender:NSMenuItem){
         placeScrollView.magnify(toFit: (placeImage.image?.alignmentRect)!)
-        setScaleDisplayValue(scale: placeScrollView.magnification)
+        updateFrameVisibleRect()
     }
     
     @IBAction func zoomOutMenuItemClicked(_ sender:NSMenuItem){
@@ -71,7 +71,7 @@ class MainViewController: NSViewController {
         if(placeScrollView.magnification - magnificationDecrement >= placeScrollView.minMagnification){
             placeScrollView.magnification = placeScrollView.magnification - magnificationDecrement
         }
-        setScaleDisplayValue(scale: placeScrollView.magnification)
+        updateFrameVisibleRect()
     }
     
     @IBAction func zoomInMenuItemClicked(_ sender:NSMenuItem){
@@ -80,7 +80,7 @@ class MainViewController: NSViewController {
         if(placeScrollView.magnification + magnificationIncrement <= placeScrollView.maxMagnification){
             placeScrollView.magnification = placeScrollView.magnification + magnificationIncrement
         }
-        setScaleDisplayValue(scale: placeScrollView.magnification)
+        updateFrameVisibleRect()
     }
     
     @IBAction func previousMenuItemSelected(_ sender: NSMenuItem) {
@@ -221,7 +221,7 @@ class MainViewController: NSViewController {
     @objc func startUpdateUITimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.01,
                              target: self,
-                             selector: #selector(updateFrameAndScale),
+                             selector: #selector(updateFrameVisibleRect),
                              userInfo: nil,
                              repeats: true)
     }
@@ -241,7 +241,7 @@ class MainViewController: NSViewController {
         timer = nil
     }
     
-    @objc func updateFrameAndScale(){
+    func updateFrameAndScale(){
         setScaleDisplayValue(scale: placeScrollView.magnification)
         updateDimensions()
     }
