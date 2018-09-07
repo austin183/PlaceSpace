@@ -95,8 +95,7 @@
 				D9C2A0CF21322DDE00EB9FB2 /* PreferencesViewController.swift */,
 				D9EACCC82135F593000C6DBE /* MainWindowController.swift */,
 			);
-			name = Controllers;
-			path = "New Group";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D95FB4CD1EAEC85B00B8C551 = {
