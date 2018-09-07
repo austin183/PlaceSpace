@@ -99,16 +99,19 @@ class MovieWriter: NSObject {
                 
                 // Convert an NSImage to CGImage, fitting within the specified rect
                 // You can replace `&rect` with nil
-                let image = NSImage(contentsOf: allImages[frameCount])
-                
-                let cgImage:CGImage = self.getCGImage(image:image!)
-                
-                let imageToWrite = NSImage(cgImage: cgImage, size: scaledSize)
-                if !self.appendPixelBufferForImageAtURL(imageToWrite, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
-                    self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
-                    print("Error converting images to video: AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
-                    return
+                autoreleasepool{
+                    let image = NSImage(contentsOf: allImages[frameCount])
+                    
+                    let cgImage:CGImage = self.getCGImage(image:image!)
+                    
+                    let imageToWrite = NSImage(cgImage: cgImage, size: scaledSize)
+                    if !self.appendPixelBufferForImageAtURL(imageToWrite, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                        self.delegate?.currentProgress("error converting images to video", current: 0, total: 0)
+                        print("Error converting images to video: AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
+                        return
+                    }
                 }
+
                 frameCount += 1
                 self.delegate?.currentProgress(section, current: frameCount, total: imageCount)
             }
