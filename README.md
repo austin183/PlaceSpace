@@ -27,4 +27,6 @@ I have tested the program with a
 
 I could export a 30,000 image MP4 while playing the Slide Show at 60fps and surfing the net in Chrome with at least 4 tabs open.  The system was busy, but everything was still responsive, and the RAM was not overly taxed.
 
-I have not looked into getting a less powerful Mac, and I don't see an option in XCode to simulate other Mac models.  I will look into Mac virtualization options, but I am not sure how Apple feels about that, even if I would just by virtualizing Mac on my Mac.
+I got a virtualized Mac running with VirtualBox, and I gave it a singe core and 4GB RAM.  It ran at a slowly, but the export process did not max out memory, and I could still move around freely on the timeline.  The slideshow still works at 60 fps, but it takes a much longer time to a frame while that is running.  I pulled up reddit in a Safari window, and it was choppy but responsive too.  
+
+For Minimum Specs, anything tha will run macOS High Sierra and has 4GB of RAM should be able to run this application.
