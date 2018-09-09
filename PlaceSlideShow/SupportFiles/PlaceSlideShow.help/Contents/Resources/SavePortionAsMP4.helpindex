@@ -1,0 +1,20 @@
+<html>
+    <a name="SavePortionAsMP4"></a><!-- apple index jargon -->
+    <title>Save Portion as MP4</title>
+    <meta name="description" content="How to save an MP4 and what all the fields are for.">
+    <h3>Save Portion as MP4</h3>
+	<p>
+		If you find a section of your timeline you like, you can save it as an MP4 file.  When you go to File -> Save Portion As MP4, a new window will open with several text fields that represent options you can set for the save process.  Since the application is sandboxed, you can only save into the Pictures folder.
+	</p>
+	<ul>
+		<li>StartIndex - Which image index to start the GIF with</li>
+		<li>StopIndex - Which image index to stop the GIF with (approximate)</li>
+		<li>Skip Frames(1) - Number of frames to skip between each frame that gets saved.  This can be used to capture longer portions of the timeline without making the final clip too big or too time consuming to watch.</li>
+		<li>Top Left x and y - The origin from the top left corner for the first point of the MP4 image set</li>
+		<li>Width and Height - How much of the image should be saved</li>
+		<li>Scale - How much bigger or smaller should the GIF be compared to the original box.</li>
+	</ul>
+	<p>
+		By lining up the portion of the picture you want to save in the main viewer window and then Choosing Save Portion as MP4, the values for x, y, width, height, and scale will carry over to the Save window so you do not have to type them in.  This way you can see exactly what will be in the clip that gets saved.  You can also use the main viewer to decide the exact StartIndex and StopIndex to set in the Save window by dragging the slider and looking at the current Index number, second from the upper right in the Main Viewer.
+	</p>
+</html>

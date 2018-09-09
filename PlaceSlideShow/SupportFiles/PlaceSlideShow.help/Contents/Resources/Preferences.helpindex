@@ -1,0 +1,14 @@
+<html>
+    <a name="Preferences"></a><!-- apple index jargon -->
+    <title>Preferences</title>
+    <meta name="description" content="What all is available in Preferences">
+    <h3>Preferences</h3>
+	<p>
+		Preferences lets you set the starting directory to find images, how fast the SlideShow should play, and which image to start on when you start the application.
+	</p>
+	<ul>
+		<li>Default Directory - Click the button to browse to the directory to use as the default, or type it in if you want</li>
+		<li>Starging Slideshow FPS - Frames per second to play the Slideshow be default</li>
+		<li>Starting Image Index - Which image index to display when starting up the application</li>
+	</ul>
+</html>
