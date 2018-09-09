@@ -135,11 +135,12 @@ class MainViewController: NSViewController {
         let launcherLogPathWithTilde = "~/Pictures" as NSString
         let expandedLauncherLogPath = launcherLogPathWithTilde.expandingTildeInPath
         dialog.directoryURL = NSURL.fileURL(withPath: expandedLauncherLogPath, isDirectory: true)
-        dialog.title = "Choose images folder"
+        dialog.title = "Which folder in the Pictures folder has all the images to display?"
         dialog.canChooseDirectories = true
         dialog.canChooseFiles = false
         dialog.allowsMultipleSelection = false
         dialog.showsResizeIndicator = true
+        dialog.message = "Which folder in the Pictures folder has all the images to display?"
         if(dialog.runModal() == NSApplication.ModalResponse.OK){
             placeDirectory = dialog.directoryURL!
         }
