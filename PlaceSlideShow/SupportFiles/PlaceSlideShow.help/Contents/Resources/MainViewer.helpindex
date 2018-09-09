@@ -1,0 +1,64 @@
+<html>
+    <a name="MainViewer"></a><!-- apple index jargon -->
+    <title>Main Viewer</title>
+    <meta name="description" content="What all is on the Main Viewer">
+    <h3>Main Viewer</h3>
+	<p>
+		If you are starting up the PlaceSlideShow for the first time, it will ask you to open the folder with your place images, or any folder full of png files, specifically. It will only read files from the User's Pictures folder because it is sandboxed to only have permissions in there.
+	</p>
+
+	<p>
+		Once your select your folder, the viewer opens and displays the first image it finds from the folder.
+	</p>
+	<p>
+		User Interactions Start/Stop Slideshow button (or press spacebar) - Show the images like a movie, moving along at the frames per second according to the position of the FPS Slider next to the button.
+	</p>
+	<p>
+		FPS Slider - Frames per second to cycle through the images. The slider goes from -200, to play the frames backwards, to 200. The further from 0 (center), the faster the images will cycle. The higher the number, the more disk, memory, and processing resources used.
+	</p>
+	<p>
+		Image Slider - Below the Slideshow interface. Drag the slider button to see a live progression of the timeline of pictures. Click a specific place to go to a specific image in the timeline. The Left and Right keys will move the slider one image to the left or right.
+	</p>
+	<p>
+		Info in the upper right is to show current placement. The Info, from the very top to the bottom: 
+	</p>
+	<h4>Controls and displayed numbers</h4>
+	<ul>
+		<li>FPS - Changes with the FPS slider to show the frames per seconds at which the slideshow will move</li>
+		<li>Current Image Index - Changes with the Image Slider to show the current image index in the set</li>
+		<li>Total Image Count - All the images the application sees in the selected folder</li>
+		<li>Origin:X - The first pixel of the image that is viewable from the left side of the viewer window (0 is leftmost)</li>
+		<li>Origin:Y - The first pixel of the image that is viewable from the top of the viewer window (0 is topmost)</li>
+		<li>Width - The width in pixels of the image that is viewable from left to right in the viewer window</li>
+		<li>Height - The height in pixels of the image that is viewable from top to bottom in the viewer window</li>
+		<li>Scale - The factor which the image is magnified (less that 1 is zoomed out of the original, greater than 1 is zoomed into the original)</li>
+	</ul>
+
+	<h4>Menu Items</h4>
+	<h5>File Menu</h5>
+	<ul>
+		<li>Open - Open a folder to view images from</li>
+		<li> Close - Closes the Main window. Kind of an app breaker right now, because there is not a way to reopen the window. Whoops.</li>
+		<li>Save Portion as MP4 - <a href="SavePortionAsMP4.helpindex">Saving Portion as MP4</a></li>
+		<li>Open this Image in Preview - Opens the currently shown image as a file in Preview. Please be careful. Editing the photo inPreview before duplicating it elsewhere will alter the source image. This option was added because it was a workaround to get dimensions for saving portions as MP4s.</li>
+	</ul>
+
+	<h5>View Menu</h5>
+	<ul>
+		<li>Show Tab bar - Doesn't do anything other than taking up space that the top of the window</li>
+		<li>Next (right key) - go to next image</li>
+		<li>Previous (left key) - go to previous image</li>
+		<li>Slideshow (spacebar) - Start/Stop slideshow</li>
+		<li>Zoom out (down key) - Zooms out by .1</li>
+		<li>Zoom in (up key) - Zooms in by .1</li>
+		<li>Move Up (w key) - Scroll the image up by 10 pixels</li>
+		<li>Move Down (s key) - Scroll the image down by 10 pixels</li>
+		<li>Move Left (a key) - Scroll the image left by 10 pixels</li>
+		<li>Move Right (d key) - Scroll the image right by 10 pixels</li>
+	</ul>
+
+	<h5>Window</h5>
+	<p>Typical Mac Window options</p>
+	<h5>Help</h5>
+	<p>This!!</p>
+</html>
