@@ -113,7 +113,7 @@ public class PlaceImageWriter_when_working_with_images {
             PlaceImageWriter writer = new PlaceImageWriter();
             int targetFrames = 20;
             String directoryPath = "/Users/austin/Documents/PlaceSpace/test";
-            writer.writeSeries(reader, targetFrames, directoryPath);
+            writer.writeSeries(reader, targetFrames, directoryPath, 10);
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
@@ -123,19 +123,19 @@ public class PlaceImageWriter_when_working_with_images {
     @Test
     public void big_test() {
         try {
-            /*
+
             ClassLoader classLoader = getClass().getClassLoader();
             URL resource = classLoader.getResource("bigccTest.txt");
             String filePath = resource.getPath();
             PlaceReader reader = new PlaceReader(filePath);
-            */
-            PlaceReader reader = new PlaceReader("/Users/austin/Documents/PlaceSpace/cctiles_sorted.txt");
+
+            //PlaceReader reader = new PlaceReader("/Users/austin/Documents/PlaceSpace/cctiles_sorted.txt");
             int lineCount = reader.getLineCount();
             System.out.println(lineCount);
             PlaceImageWriter writer = new PlaceImageWriter();
-            int targetFrames = 25000;
+            int targetFrames = 250;
             String directoryPath = "/Users/austin/Documents/PlaceSpace/test";
-            writer.writeSeries(reader, targetFrames, directoryPath);
+            writer.writeSeries(reader, targetFrames, directoryPath, 10);
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
